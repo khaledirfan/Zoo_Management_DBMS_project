@@ -13,8 +13,96 @@
     
 }
 
-.header__button{
-    background: #EEA402;
+
+
+
+.promo-slider__button{
+    background: #DD7236
+    
+    
+}
+
+ 
+.promo-slider__button:hover {
+    
+    background: darksalmon;
+    
+}
+
+.home-animals{
+    /* background: rgb(238, 164, 2);
+        background: linear-gradient(180deg, rgba(238, 164, 2, 0.26684177088804273) 40%, rgba(238, 164, 2, 0.7514356084230567) 90%); */
+
+        background: rgb(255, 255, 255);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.8438725832129726) 0%, rgba(238, 164, 2, 0.26684177088804273) 40%, rgba(238, 164, 2, 0.7514356084230567) 90%);
 }
 
 
+.about-front::before{
+    /* background: #274215e7; */
+    background: rgb(255, 255, 255);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.846673703661152) 0%, rgba(133, 187, 77, 0.8578781854538691) 30%, rgba(39, 66, 21, 0.846673703661152) 90%);
+
+
+}
+
+.animal-item__title{
+    color: white;
+}
+
+.card-first{
+    background: #274215 ;
+}
+
+.card-second {
+    background: #85BB4D;
+}
+
+.card-third {
+    background: #EEA402;
+}
+
+.card-fourth {
+    background: #DD7236;
+}
+
+.card-fifth {
+    background: #85BB4D;
+}
+
+.card-sixth {
+    background: #274215;
+}
+
+.button:hover{
+    color: white;
+    background: #274215;
+}
+
+.map-banner .button:hover {
+    color: white;
+    background: #274215;
+}
+
+.main-event .cow{
+    opacity: 50%;
+    left: 60%
+}
+
+.logos-slider__item img{
+    width: auto;
+}
+
+.cta-block{
+    background: #EEA402;
+}
+
+.table__header{
+    background: #EEA402;
+}
+
+.footer{
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 2rem;
+}
