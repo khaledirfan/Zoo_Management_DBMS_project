@@ -1,5 +1,3 @@
---DROP TABLE
-<<<<<<< HEAD
 DROP TABLE ANIMAL;
 DROP TABLE CAGE;
 DROP TABLE MUSEUM;
@@ -11,41 +9,38 @@ DROP TABLE INCOME ;
 DROP TABLE TAXONOMY ;
 Drop TABLE Visitor_Info;
 Drop TABLE VisitorInfo_PhoneNo;
-=======
->>>>>>> 3b594e2643c8532259917fb8799f88ac10decd49
-DROP TABLE ANIMAL; --
-DROP TABLE ANIMAL_DIET; --
-DROP TABLE ANIMAL_EXPENDITURE; --
-DROP TABLE CAGE; --
-Drop TABLE Complaints; --
-Drop TABLE ComplaintsAboutCage; --
-DROP TABLE EMPLOYEE ; --
-DROP TABLE EMPLOYEE_PHONE; --
-DROP TABLE EXPENDITURE ; --
-Drop TABLE Employee_Complaints; --
-DROP TABLE FOOD; --
-DROP TABLE FOOD_SUPPLIER_PHONE_NUMBER; --
-DROP TABLE FOOD_SUPPLIER; --
-DROP TABLE FOOD_COST; --
-DROP TABLE INCOME ; --
-DROP TABLE LOOK_AFTER; --
-DROP TABLE MUSEUM; --
-DROP TABLE PROVIDES; --
-DROP TABLE TAKE_CARE; --
-DROP TABLE TAXONOMY ; --
-Drop TABLE Ticket_info; --
-DROP TABLE RESEARCH_WORK; --
-DROP TABLE RESEARCH_ON_ANIMAL; --
-DROP TABLE RESEARCH_ON_MUSEUM; --
-DROP TABLE SALARY_COST; --
-DROP TABLE SUPPLIED_FOOD; --
-DROP TABLE VACCINE; --
-DROP TABLE VACCINATION ; --
-DROP TABLE VACCINE_COST; --
-Drop TABLE Visitor_Info; --
-Drop TABLE VisitorInfo_PhoneNo; --
+DROP TABLE ANIMAL;
+DROP TABLE ANIMAL_DIET; 
+DROP TABLE ANIMAL_EXPENDITURE; 
+DROP TABLE CAGE; 
+Drop TABLE Complaints;
+Drop TABLE ComplaintsAboutCage;
+DROP TABLE EMPLOYEE ;
+DROP TABLE EMPLOYEE_PHONE; 
+DROP TABLE EXPENDITURE ; 
+Drop TABLE Employee_Complaints;
+DROP TABLE FOOD;
+DROP TABLE FOOD_SUPPLIER_PHONE_NUMBER; 
+DROP TABLE FOOD_SUPPLIER;
+DROP TABLE FOOD_COST; 
+DROP TABLE INCOME ; 
+DROP TABLE LOOK_AFTER; 
+DROP TABLE MUSEUM; 
+DROP TABLE PROVIDES; 
+DROP TABLE TAKE_CARE; 
+DROP TABLE TAXONOMY ;
+Drop TABLE Ticket_info;
+DROP TABLE RESEARCH_WORK; 
+DROP TABLE RESEARCH_ON_ANIMAL; 
+DROP TABLE RESEARCH_ON_MUSEUM; 
+DROP TABLE SALARY_COST;
+DROP TABLE SUPPLIED_FOOD; 
+DROP TABLE VACCINE; 
+DROP TABLE VACCINATION ; 
+DROP TABLE VACCINE_COST; 
+Drop TABLE Visitor_Info; 
+Drop TABLE VisitorInfo_PhoneNo; 
 Drop TABLE Visitor_visitingDates;
-<<<<<<< HEAD
 Drop TABLE Complaints;
 Drop TABLE Visitor_Complaints;
 Drop TABLE Ticket_info;
@@ -63,14 +58,12 @@ DROP TABLE RESEARCH_ON_MUSEUM;
 DROP TABLE ZOO_INFO;
 DROP TABLE VACCINE;
 DROP TABLE EXPENDITURE ;
-=======
->>>>>>> 3b594e2643c8532259917fb8799f88ac10decd49
-Drop TABLE Visitor_Complaints; --
-DROP TABLE ZOO_INFO; --
+Drop TABLE Visitor_Complaints; 
+DROP TABLE ZOO_INFO;
 
 
 
---****** CREATE TABLE
+
 CREATE TABLE ZOO_INFO(
     ZOO_NAME VARCHAR2(40),
     OPEN_STATUS VARCHAR2(20),
@@ -153,10 +146,10 @@ CREATE TABLE MUSEUM(
 	CONSTRAINT MUSEUM_EMPLOYEE_ID_FK FOREIGN KEY(EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE CASCADE
 );
 CREATE TABLE ANIMAL(
-	ANIMAL_ID VARCHAR2(20) NOT NULL,
+	ANIMAL_ID VARCHAR2(20),
 	ANIMAL_NAME VARCHAR2(20) NOT NULL,
 	NICKNAME VARCHAR2(20),
-	AGE NUMBER(3,0),
+	AGE NUMBER(5,0),
 	GENDER VARCHAR2(20) NOT NULL,
 	CURRENT_CONDITION VARCHAR2(40),
 	ANIMAL_CATEGORY VARCHAR2(20),
@@ -172,15 +165,9 @@ CREATE TABLE ANIMAL(
 	SPECIAL_DIMENSION VARCHAR2(30),
 	HEIGHT NUMBER(3,0),
 	a_WEIGHT NUMBER(20,0),
-<<<<<<< HEAD
-=======
 	HGT NUMBER(3,0),
 	WGT NUMBER(5,0),
->>>>>>> 37a0e265d82fbb8401bcfae866d4b84bd18f90ff:Backend_data/table.sql
 	DEATH VARCHAR2(20),
-=======
->>>>>>> 3b594e2643c8532259917fb8799f88ac10decd49
-    DEATH VARCHAR2(20),
 	CAUSE VARCHAR2(20),
 	GENUS VARCHAR2(20),
 	SPECIES VARCHAR2(20),
@@ -271,14 +258,14 @@ CREATE TABLE LOOK_AFTER
     CAGE_NO NUMBER(3,0) NOT NULL,
 	EMPLOYEE_ID VARCHAR2(20),
 	CONSTRAINT LOOK_AFTER_CAGE_NO_FK FOREIGN KEY(CAGE_NO) REFERENCES CAGE(CAGE_NO) ON DELETE CASCADE,
-	CONSTRAINT LOOK_AFTER_EMPLOYEE_ID_FK FOREIGN KEY(EMPLOYEE_ID) REFERENCES EMPLOYEE_INFO(EMPLOYEE_ID) ON DELETE CASCADE
+	CONSTRAINT LOOK_AFTER_EMPLOYEE_ID_FK FOREIGN KEY(EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE CASCADE
 );
 CREATE TABLE TAKE_CARE
 (
-    ANIMAL_ID VARCHAR2(20) NOT NULL,
+    ANIMAL_ID VARCHAR2(20),
 	EMPLOYEE_ID VARCHAR2(20),
 	CONSTRAINT TAKE_CARE_ANIMAL_ID_FK FOREIGN KEY(ANIMAL_ID) REFERENCES ANIMAL(ANIMAL_ID) ON DELETE CASCADE,
-	CONSTRAINT TAKE_CARE_EMPLOYEE_ID_FK FOREIGN KEY(EMPLOYEE_ID) REFERENCES EMPLOYEE_INFO(EMPLOYEE_ID) ON DELETE CASCADE;
+	CONSTRAINT TAKE_CARE_EMPLOYEE_ID_FK FOREIGN KEY(EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE CASCADE
 );
 CREATE TABLE Visitor_Info
 (
@@ -333,17 +320,13 @@ CREATE TABLE Employee_Complaints
 	Complaint_no VARCHAR2(20),
 	EMPLOYEE_ID VARCHAR2(20),
 	CONSTRAINT Employee_Complaints_Complaint_no_fk FOREIGN KEY (Complaint_no) REFERENCES Complaints(Complaint_no) ON DELETE CASCADE,
-<<<<<<< HEAD
-	CONSTRAINT Employee_Complaints_EMPLOYEE_ID_fk FOREIGN KEY (Employee_id) REFERENCES EMPLOYEE_INFO(EMPLOYEE_ID) ON DELETE CASCADE
-=======
->>>>>>> 3b594e2643c8532259917fb8799f88ac10decd49
 	CONSTRAINT Employee_Complaints_EMPLOYEE_ID_fk FOREIGN KEY ( EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE CASCADE
 );
 
 CREATE TABLE ComplaintsAboutCage
 (
 	Complaint_no VARCHAR2(20),
-	CAGE_NO VARCHAR2(20),
+	CAGE_NO NUMBER(5,0),
 	CONSTRAINT ComplaintsAboutCage_Complaint_no_fk FOREIGN KEY (Complaint_no) REFERENCES Complaints(Complaint_no) ON DELETE CASCADE,
 	CONSTRAINT ComplaintsAboutCage_Cage_no_fk FOREIGN KEY (CAGE_NO) REFERENCES CAGE(CAGE_NO) ON DELETE CASCADE
 );
@@ -369,16 +352,6 @@ CREATE TABLE ANIMAL_EXPENDITURE(
 	CONSTRAINT ANIMAL_EXPENDITURE_ANIMAL_ID_fk FOREIGN KEY (ANIMAL_ID) REFERENCES ANIMAL(ANIMAL_ID) ON DELETE CASCADE,
 	CONSTRAINT ANIMAL_EXPENDITURE_TRX_EXP_ID_fk FOREIGN KEY (TRX_EXP_ID) REFERENCES EXPENDITURE(TRX_EXP_ID) ON DELETE CASCADE
 );
-<<<<<<< HEAD
-
-CREATE TABLE SALARY_COST(
-	EMPLOYEE_ID VARCHAR2(20),
-	TRX_EXP_ID VARCHAR2(20),
-	CONSTRAINT SALARY_COST_EMPLOYEE_ID_fk FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE CASCADE,
-	CONSTRAINT SALARY_COST_TRX_EXP_ID_fk FOREIGN KEY (TRX_EXP_ID) REFERENCES EXPENDITURE(TRX_EXP_ID) ON DELETE CASCADE
-);
-=======
->>>>>>> 3b594e2643c8532259917fb8799f88ac10decd49
 
 CREATE TABLE SALARY_COST(
 	EMPLOYEE_ID VARCHAR2(20),
@@ -389,7 +362,6 @@ CREATE TABLE SALARY_COST(
 
  
 
---************ INSERTION
 
 INSERT INTO ZOO_INFO ( ZOO_NAME, OPEN_STATUS , VISITING_TIME) 
 VALUES ('National_Zoo','Yes/No', '8:00am-8:00pm');
@@ -580,72 +552,111 @@ INSERT INTO RESEARCH_WORK (PAPERLINK,RESEARCHER_NAME,RESEARCHER_MAIL,RESEARCHER_
 VALUES ('http://usgs.gov/pellentesque/ultrices/phasellus','kstaten9','cdiprose9@histats.com','013445784958763219','INSECTS','SHER E BANGLA AGRICULTURAL UNIVERSITY' );
 
 
-INSERT INTO SALARY_COST (EMPLOYEE_ID,TRX_EXP_ID) 
-VALUES ('E_ID00001','TRXID00001');
+INSERT INTO ANIMAL(ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER, CURRENT_CONDITION, ANIMAL_CATEGORY, ARRIVAL_PLACE,ARRIVAL_DATE, BREEDING_STATUS, ENDANGERED_STATUS, ENVIRONMENT, CAGE_NO, PREVIOUS_AFFECTED_DISEASES, PRICE, LIFESPAN, SPECIAL_DIMENSION, HEIGHT, a_WEIGHT,HGT,WGT,DEATH, CAUSE, GENUS, SPECIES) 
+VALUES ('A_ID00001', 'TIGER','HALUM',10,'MALE', 'GOOD','MAMMAL','SUNDARBAN',to_date('12-06-2022','DD-MM-YYYY'),'NONE','YES','FOREST',10, 'COLD',10000000,'30YEARS','ANJNDF', 3,150, 3,150, 'NONE','NONE',' Panthera','tigris');
+INSERT INTO ANIMAL(ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER, CURRENT_CONDITION, ANIMAL_CATEGORY, ARRIVAL_PLACE,ARRIVAL_DATE, BREEDING_STATUS, ENDANGERED_STATUS, ENVIRONMENT, CAGE_NO, PREVIOUS_AFFECTED_DISEASES, PRICE, LIFESPAN, SPECIAL_DIMENSION, HEIGHT, a_WEIGHT,HGT,WGT,DEATH, CAUSE, GENUS, SPECIES) 
+VALUES ('A_ID00002', 'MACACA','MACU',10,'MALE', 'GOOD','MAMMAL','SUNDARBAN',to_date('12-06-2022','DD-MM-YYYY'),'NONE','YES','FOREST',20, 'COLD',10000000,'30YEARS','ANJNDF', 3,150, 3,150, 'NONE','NONE','Macaca','Paradoxurus ');
+INSERT INTO ANIMAL(ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER, CURRENT_CONDITION, ANIMAL_CATEGORY, ARRIVAL_PLACE,ARRIVAL_DATE, BREEDING_STATUS, ENDANGERED_STATUS, ENVIRONMENT, CAGE_NO, PREVIOUS_AFFECTED_DISEASES, PRICE, LIFESPAN, SPECIAL_DIMENSION, HEIGHT, a_WEIGHT,HGT,WGT,DEATH, CAUSE, GENUS, SPECIES) 
+VALUES ('A_ID00003', 'MILVAGO','MILVAGO',10,'MALE', 'GOOD','MAMMAL','SUNDARBAN',to_date('12-06-2022','DD-MM-YYYY'),'NONE','YES','FOREST',30, 'COLD',10000000,'30YEARS','ANJNDF', 3,150, 3,150, 'NONE','NONE','Milvago','hermaphroditus');
+INSERT INTO ANIMAL(ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER, CURRENT_CONDITION, ANIMAL_CATEGORY, ARRIVAL_PLACE,ARRIVAL_DATE, BREEDING_STATUS, ENDANGERED_STATUS, ENVIRONMENT, CAGE_NO, PREVIOUS_AFFECTED_DISEASES, PRICE, LIFESPAN, SPECIAL_DIMENSION, HEIGHT, a_WEIGHT,HGT,WGT,DEATH, CAUSE, GENUS, SPECIES) 
+VALUES ('A_ID00004', 'DACELO','DACELO',10,'MALE', 'GOOD','MAMMAL','SUNDARBAN',to_date('12-06-2022','DD-MM-YYYY'),'NONE','YES','FOREST',40, 'COLD',10000000,'30YEARS','ANJNDF', 3,150, 3,150, 'NONE','NONE','Dacelo' ,'novaeguineae');
+INSERT INTO ANIMAL(ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER, CURRENT_CONDITION, ANIMAL_CATEGORY, ARRIVAL_PLACE,ARRIVAL_DATE, BREEDING_STATUS, ENDANGERED_STATUS, ENVIRONMENT, CAGE_NO, PREVIOUS_AFFECTED_DISEASES, PRICE, LIFESPAN, SPECIAL_DIMENSION, HEIGHT, a_WEIGHT,HGT,WGT,DEATH, CAUSE, GENUS, SPECIES) 
+VALUES ('A_ID00005', 'CORDYLUS','DACELO',10,'MALE', 'GOOD','MAMMAL','SUNDARBAN',to_date('12-06-2022','DD-MM-YYYY'),'NONE','YES','FOREST',50, 'COLD',10000000,'30YEARS','ANJNDF', 3,150, 3,150, 'NONE','NONE','Cordylus ' ,'giganteus');
 
 
-INSERT INTO VACCINE_COST (TRX_EXP_ID,VACCINE_ID) 
-VALUES ('TRXID00001','V000001');
+INSERT INTO RESEARCH_ON_ANIMAL (ANIMAL_ID,PAPERLINK) 
+VALUES ('A_ID00001','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
+INSERT INTO RESEARCH_ON_ANIMAL (ANIMAL_ID,PAPERLINK) 
+VALUES ('A_ID00002','http://umich.edu/faucibus/orci/luctus/et/ultrices');
+INSERT INTO RESEARCH_ON_ANIMAL (ANIMAL_ID,PAPERLINK) 
+VALUES ('A_ID00003','https://freewebs.com/lobortis/vel/dapibus/at.jsp');
+INSERT INTO RESEARCH_ON_ANIMAL (ANIMAL_ID,PAPERLINK) 
+VALUES ('A_ID00004','http://usgs.gov/vivamus.png?tincidunt=erat&lacus');
+INSERT INTO RESEARCH_ON_ANIMAL (ANIMAL_ID,PAPERLINK) 
+VALUES ('A_ID00005','http://usgs.gov/pellentesque/ultrices/phasellus');
 
---*********** QUERY
 
-INSERT INTO RESEARCH_ON_ANIMAL
-(ANIMAL_ID,PAPERLINK) VALUES ('A01','...ABOUT1');
-INSERT INTO RESEARCH_ON_ANIMAL
-(ANIMAL_ID,PAPERLINK) VALUES ('A02','...ABOUT2');
-INSERT INTO RESEARCH_ON_ANIMAL
-(ANIMAL_ID,PAPERLINK) VALUES ('A03','...ABOUT3');
-INSERT INTO RESEARCH_ON_ANIMAL
-(ANIMAL_ID,PAPERLINK) VALUES ('A04','...ABOUT4');
-INSERT INTO RESEARCH_ON_ANIMAL
-(ANIMAL_ID,PAPERLINK) VALUES ('A05','...ABOUT5');
- INSERT INTO RESEARCH_ON_MUSEUM
-(SPECIMEN_ID,PAPERLINK) VALUES ('S01','...ABOUT1');
- INSERT INTO RESEARCH_ON_MUSEUM
-(SPECIMEN_ID,PAPERLINK) VALUES ('S02','...ABOUT2');
- INSERT INTO RESEARCH_ON_MUSEUM
-(SPECIMEN_ID,PAPERLINK) VALUES ('S03','...ABOUT3');
- INSERT INTO RESEARCH_ON_MUSEUM
-(SPECIMEN_ID,PAPERLINK) VALUES ('S04','...ABOUT4');
- INSERT INTO RESEARCH_ON_MUSEUM
-(SPECIMEN_ID,PAPERLINK) VALUES ('S05','...ABOUT5');
+INSERT INTO RESEARCH_ON_MUSEUM (SPECIMEN_ID,PAPERLINK) 
+VALUES ('S_ID00001','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
+INSERT INTO RESEARCH_ON_MUSEUM (SPECIMEN_ID,PAPERLINK) 
+VALUES ('S_ID00002','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
+INSERT INTO RESEARCH_ON_MUSEUM (SPECIMEN_ID,PAPERLINK) 
+VALUES ('S_ID00003','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
+INSERT INTO RESEARCH_ON_MUSEUM (SPECIMEN_ID,PAPERLINK) 
+VALUES ('S_ID00004','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
+INSERT INTO RESEARCH_ON_MUSEUM (SPECIMEN_ID,PAPERLINK) 
+VALUES ('S_ID00005','http://tiny.cc/leo/pellentesque/ultrices/mattis.jp');
 
+
+INSERT INTO ANIMAL_DIET(FOOD_NAME, ANIMAL_ID, PROVIDED_QUANTITY)
+VALUES('Watermelon','A_ID00001',100);
+INSERT INTO ANIMAL_DIET(FOOD_NAME, ANIMAL_ID, PROVIDED_QUANTITY)
+VALUES('Corn','A_ID00002',100);
+INSERT INTO ANIMAL_DIET(FOOD_NAME, ANIMAL_ID, PROVIDED_QUANTITY)
+VALUES('Fodder','A_ID00003',100);
+INSERT INTO ANIMAL_DIET(FOOD_NAME, ANIMAL_ID, PROVIDED_QUANTITY)
+VALUES('Red Meat','A_ID00004',100);
+INSERT INTO ANIMAL_DIET(FOOD_NAME, ANIMAL_ID, PROVIDED_QUANTITY)
+VALUES('Sweet potato','A_ID00005',100);
+
+
+INSERT INTO LOOK_AFTER(CAGE_NO,EMPLOYEE_ID)
+VALUES(10, 'E_ID00001');
+INSERT INTO LOOK_AFTER(CAGE_NO,EMPLOYEE_ID)
+VALUES(20, 'E_ID00002');
+INSERT INTO LOOK_AFTER(CAGE_NO,EMPLOYEE_ID)
+VALUES(30, 'E_ID00003');
+INSERT INTO LOOK_AFTER(CAGE_NO,EMPLOYEE_ID)
+VALUES(40, 'E_ID00004');
+INSERT INTO LOOK_AFTER(CAGE_NO,EMPLOYEE_ID)
+VALUES(50, 'E_ID00005');
+
+
+INSERT INTO TAKE_CARE(ANIMAL_ID,EMPLOYEE_ID)
+VALUES('A_ID00001', 'E_ID00001');
+INSERT INTO TAKE_CARE(ANIMAL_ID,EMPLOYEE_ID)
+VALUES('A_ID00002', 'E_ID00002');
+INSERT INTO TAKE_CARE(ANIMAL_ID,EMPLOYEE_ID)
+VALUES('A_ID00003', 'E_ID00003');
+INSERT INTO TAKE_CARE(ANIMAL_ID,EMPLOYEE_ID)
+VALUES('A_ID00004', 'E_ID00004');
+INSERT INTO TAKE_CARE(ANIMAL_ID,EMPLOYEE_ID)
+VALUES('A_ID00005', 'E_ID00005');
 
 
 INSERT INTO Visitor_Info(Register_id, visitor_Name,visitor_Gender,Visitor_Email,Visitor_DOB,Visitor_Age,Visitor_Password,Total_Visits)
-values ('123','Khaled','male','khaled@gmail.com',to_date('2-2-2000','dd-mm-yyyy'),22,'ncafbaf',5);
+values ('V_ID00001','Khaled','male','khaled@gmail.com',to_date('2-2-2000','dd-mm-yyyy'),22,'ncafbaf',5);
 INSERT INTO Visitor_Info(Register_id, visitor_Name,visitor_Gender,Visitor_Email,Visitor_DOB,Visitor_Age,Visitor_Password,Total_Visits)
-values ('122','Enan','male','enan@gmail.com',to_date('3-2-2000','dd-mm-yyyy'),22,'ncajdajkakf',5);
+values ('V_ID00002','Enan','male','enan@gmail.com',to_date('3-2-2000','dd-mm-yyyy'),22,'ncajdajkakf',5);
 INSERT INTO Visitor_Info(Register_id, visitor_Name,visitor_Gender,Visitor_Email,Visitor_DOB,Visitor_Age,Visitor_Password,Total_Visits)
-values ('120','Nuraia','female','nuraia@gmail.com',to_date('4-2-2000','dd-mm-yyyy'),22,'ncafbafdafk44',5);
+values ('V_ID00003','Nuraia','female','nuraia@gmail.com',to_date('4-2-2000','dd-mm-yyyy'),22,'ncafbafdafk44',5);
 INSERT INTO Visitor_Info(Register_id, visitor_Name,visitor_Gender,Visitor_Email,Visitor_DOB,Visitor_Age,Visitor_Password,Total_Visits)
-values ('119','zerin','female','zering@gmail.com',to_date('5-2-2000','dd-mm-yyyy'),22,'ncafba,vfdmf',5);
+values ('V_ID00004','zerin','female','zering@gmail.com',to_date('5-2-2000','dd-mm-yyyy'),22,'ncafba,vfdmf',5);
 INSERT INTO Visitor_Info(Register_id, visitor_Name,visitor_Gender,Visitor_Email,Visitor_DOB,Visitor_Age,Visitor_Password,Total_Visits)
-values ('118','Tahsin faisal','male','tahsin@gmail.com',to_date('6-2-2000','dd-mm-yyyy'),22,'ncamdfakffbaf',5);
+values ('V_ID00005','Tahsin faisal','male','tahsin@gmail.com',to_date('6-2-2000','dd-mm-yyyy'),22,'ncamdfakffbaf',5);
 
 
 INSERT INTO VisitorInfo_PhoneNo(Register_id, Visitor_PhoneNo)
-values ('123','12345');
+values ('V_ID00001','12345');
 INSERT INTO VisitorInfo_PhoneNo(Register_id, Visitor_PhoneNo)
-values ('123','678910');
+values ('V_ID00002','678910');
 INSERT INTO VisitorInfo_PhoneNo(Register_id, Visitor_PhoneNo)
-values ('120','93557347');
+values ('V_ID00003','93557347');
 INSERT INTO VisitorInfo_PhoneNo(Register_id, Visitor_PhoneNo)
-values ('122','453257450');
+values ('V_ID00004','453257450');
 INSERT INTO VisitorInfo_PhoneNo(Register_id, Visitor_PhoneNo)
-values ('118','8452985704');
+values ('V_ID00005','8452985704');
 
-
 INSERT INTO Visitor_visitingDates(Register_id,Visiting_Dates)
-values ('123',to_date('2-4-2022','dd-mm-yyyy'));
+values ('V_ID00001',to_date('2-4-2022','dd-mm-yyyy'));
 INSERT INTO Visitor_visitingDates(Register_id,Visiting_Dates)
-values ('123',to_date('17-4-2022','dd-mm-yyyy'));
+values ('V_ID00002',to_date('17-4-2022','dd-mm-yyyy'));
 INSERT INTO Visitor_visitingDates(Register_id,Visiting_Dates)
-values ('123',to_date('19-4-2022','dd-mm-yyyy'));
+values ('V_ID00003',to_date('19-4-2022','dd-mm-yyyy'));
 INSERT INTO Visitor_visitingDates(Register_id,Visiting_Dates)
-values ('120',to_date('2-4-2022','dd-mm-yyyy'));
+values ('V_ID00004',to_date('2-4-2022','dd-mm-yyyy'));
 INSERT INTO Visitor_visitingDates(Register_id,Visiting_Dates)
-values ('119',to_date('19-4-2022','dd-mm-yyyy'));
+values ('V_ID00005',to_date('19-4-2022','dd-mm-yyyy'));
 
 
 INSERT INTO Complaints(Complaint_no, Complaint_type, Compliant_date,Complian_details)
@@ -661,85 +672,78 @@ values ('5', 'zoo related',to_date('19-04-2022','dd-mm-yyyy'), 'zoo not clean');
 
 
 INSERT INTO Visitor_Complaints(Complaint_no, Register_id)
-values ('1', '123');
+values ('1', 'V_ID00001');
 INSERT INTO Visitor_Complaints(Complaint_no, Register_id)
-values ('2', '122');
+values ('2', 'V_ID00002');
 INSERT INTO Visitor_Complaints(Complaint_no, Register_id)
-values ('3', '123');
+values ('3', 'V_ID00003');
 INSERT INTO Visitor_Complaints(Complaint_no, Register_id)
-values ('4', '120');
+values ('4', 'V_ID00004');
 INSERT INTO Visitor_Complaints(Complaint_no, Register_id)
-values ('5', '118');
+values ('5', 'V_ID00005');
 
-
 INSERT INTO Ticket_info(Ticket_id,Ticket_type,Buying_date,Buying_Time, Ticket_Price, Register_id)
-values ('111','zoo meuseum',to_date('19-4-2022','dd-mm-yyyy'),'1:00pm',200,'123');
+values ('T_ID00001','zoo meuseum',to_date('19-4-2022','dd-mm-yyyy'),'1:00pm',200,'V_ID00001');
 INSERT INTO Ticket_info(Ticket_id,Ticket_type,Buying_date,Buying_Time, Ticket_Price, Register_id)
-values ('112','zoo',to_date('20-4-2022','dd-mm-yyyy'),'2:00pm',100,'122');
+values ('T_ID00002','zoo',to_date('20-4-2022','dd-mm-yyyy'),'2:00pm',100,'V_ID00002');
 INSERT INTO Ticket_info(Ticket_id,Ticket_type,Buying_date,Buying_Time, Ticket_Price, Register_id)
-values ('113','zoo',to_date('21-4-2022','dd-mm-yyyy'),'3:00pm',100,'119');
+values ('T_ID00003','zoo',to_date('21-4-2022','dd-mm-yyyy'),'3:00pm',100,'V_ID00003');
 INSERT INTO Ticket_info(Ticket_id,Ticket_type,Buying_date,Buying_Time, Ticket_Price, Register_id)
-values ('114','meuseum',to_date('22-4-2022','dd-mm-yyyy'),'4:00pm',200,'120');
+values ('T_ID00004','meuseum',to_date('22-4-2022','dd-mm-yyyy'),'4:00pm',200,'V_ID00004');
 INSERT INTO Ticket_info(Ticket_id,Ticket_type,Buying_date,Buying_Time, Ticket_Price, Register_id)
-values ('115','zoo meuseum',to_date('23-4-2022','dd-mm-yyyy'),'5:00pm',200,'123');
-
-
-INSERT INTO Employee(Employee_id)
-values('1');
-INSERT INTO Employee(Employee_id)
-values('2');
-INSERT INTO Employee(Employee_id)
-values('3');
-INSERT INTO Employee(Employee_id)
-values('4');
-INSERT INTO Employee(Employee_id)
-values('5');
+values ('T_ID00005','zoo meuseum',to_date('23-4-2022','dd-mm-yyyy'),'5:00pm',200,'V_ID00005');
 
 
 INSERT INTO Employee_Complaints(Complaint_no, Employee_id)
-values('1','1');
+values('1','E_ID00001');
 INSERT INTO Employee_Complaints(Complaint_no, Employee_id)
-values('1','2');
+values('1','E_ID00002');
 INSERT INTO Employee_Complaints(Complaint_no, Employee_id)
-values('1','3');
+values('1','E_ID00003');
 INSERT INTO Employee_Complaints(Complaint_no, Employee_id)
-values('2','2');
+values('2','E_ID00004');
 INSERT INTO Employee_Complaints(Complaint_no, Employee_id)
-values('3','2');
-
-
-INSERT INTO Cage(Cage_no)
-values('1');
-INSERT INTO Cage(Cage_no)
-values('2');
-INSERT INTO Cage(Cage_no)
-values('3');
-INSERT INTO Cage(Cage_no)
-values('4');
-INSERT INTO Cage(Cage_no)
-values('5');
-
+values('3','E_ID00005');
 
 INSERT INTO ComplaintsAboutCage(Complaint_no, Cage_no)
-values('1','1');
+values('1',10);
 INSERT INTO ComplaintsAboutCage(Complaint_no, Cage_no)
-values('1','2');
+values('1',20);
 INSERT INTO ComplaintsAboutCage(Complaint_no, Cage_no)
-values('1','3');
+values('1',30);
 INSERT INTO ComplaintsAboutCage(Complaint_no, Cage_no)
-values('2','1');
+values('2',40);
 INSERT INTO ComplaintsAboutCage(Complaint_no, Cage_no)
-values('4','1');
+values('4',50);
 
 
 
-INSERT INTO ANIMAL( ANIMAL_ID,ANIMAL_NAME,NICKNAME,AGE,GENDER,CURRENT_CONDITION,ANIMAL_CATEGORY,ARRIVAL_PLACE,ARRIVAL_DATE,
-                    BREEDING_STATUS,ENDANGERED_STATUS,ENVIRONMENT,CAGE_NO,PREVIOUS_AFFECTED_DISEASES,PRICE,LIFESPAN,
-                    SPECIAL_DIMENSION,HEIGHT,a_WEIGHT,DEATH,CAUSE,GENUS,SPECIES)
-values('A_01','Royal Bengal Tiger','Halum',30,'Male','Good','Mammal','ShundarBan',to_date('22-4-2022','dd-mm-yyyy'),'..','Yes',
-        'Forest',10,'...',200,'..','..', 110 ,260,'..','..','Panthera','tigris');
+INSERT INTO SALARY_COST (EMPLOYEE_ID,TRX_EXP_ID) 
+VALUES ('E_ID00001','TRXID00001');
 
- 
+
+INSERT INTO VACCINE_COST (TRX_EXP_ID,VACCINE_ID) 
+VALUES ('TRXID00001','V000001');
+
+--*********** QUERY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --queries
 SELECT * FROM Visitor_Info;
 SELECT * FROM Ticket_info;
