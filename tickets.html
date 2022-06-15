@@ -9,6 +9,7 @@
 		<title>Animal World HTML Template</title>
 		<!-- styles-->
 		<link rel="stylesheet" href="css/styles.min.css"/>
+		<link rel="stylesheet" href="css/style.css">
 		<!-- web-font loader-->
 		<script>
 			WebFontConfig = {
@@ -44,28 +45,28 @@
 			<div class="menu-dropdown">
 				<div class="menu-dropdown__inner" data-value="start">
 					<div class="screen screen--start">
-						<div class="screen__item screen--trigger" data-category="home"><span>Home</span><span>
-							<svg class="icon">
-								<use xlink:href="#chevron"></use>
-							</svg></span></div>
-						<div class="screen__item screen--trigger item--active" data-category="pages"><span>Pages</span><span>
-							<svg class="icon">
-								<use xlink:href="#chevron"></use>
-							</svg></span></div>
-						<div class="screen__item"><a class="screen__link" href="blog.html">Blog</a></div>
-						<div class="screen__item screen--trigger" data-category="shop"><span>Shop</span><span>
-							<svg class="icon">
-								<use xlink:href="#chevron"></use>
-							</svg></span></div>
-						<div class="screen__item"><a class="screen__link" href="contacts.html">Contacts</a></div>
-						<div class="screen__item screen--trigger" data-category="elements"><span>Elements</span><span>
-							<svg class="icon">
-								<use xlink:href="#chevron"></use>
-							</svg></span></div>
-						<div class="screen__item screen--trigger" data-category="language"><span>Language</span><span>
-							<svg class="icon">
-								<use xlink:href="#chevron"></use>
-							</svg></span></div>
+						<div class="screen__item screen--trigger item--active" data-category="home"><span>VISIT</span><span>
+								<svg class="icon">
+									<use xlink:href="#chevron"></use>
+								</svg></span></div>
+						<div class="screen__item screen--trigger" data-category="pages"><span>THINGS TO DO</span><span>
+								<svg class="icon">
+									<use xlink:href="#chevron"></use>
+								</svg></span></div>
+						<div class="screen__item"><a class="screen__link" href="blog.html">LEARN AND RESEARCH</a></div>
+						<div class="screen__item screen--trigger" data-category="shop"><span>ANIMAL</span><span>
+								<svg class="icon">
+									<use xlink:href="#chevron"></use>
+								</svg></span></div>
+						<div class="screen__item"><a class="screen__link" href="contacts.html">MUSEUM</a></div>
+						<div class="screen__item screen--trigger" data-category="elements"><span>ABOUT</span><span>
+								<svg class="icon">
+									<use xlink:href="#chevron"></use>
+								</svg></span></div>
+						<div class="screen__item screen--trigger" data-category="language"><span>SUPPORT US</span><span>
+								<svg class="icon">
+									<use xlink:href="#chevron"></use>
+								</svg></span></div>
 						<ul class="screen__socials">
 							<li><a class="item--facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							<li><a class="item--twitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -83,7 +84,7 @@
 								</svg> <span>Home</span>
 							</h6>
 						</div>
-						<div class="screen__item"><a class="screen__link" href="index.html">Home Zoo</a></div>
+						<div class="screen__item item--active"><a class="screen__link" href="index.html">Home Zoo</a></div>
 						<div class="screen__item"><a class="screen__link" href="front_2.html">Home Aquarium</a></div>
 						<div class="screen__item"><a class="screen__link" href="front_3.html">Home Terrarium</a></div>
 						<div class="screen__item"><a class="screen__link" href="front_4.html">Home Protections</a></div>
@@ -109,11 +110,12 @@
 						<div class="screen__item"><a class="screen__link" href="membership.html">Membership</a></div>
 						<div class="screen__item"><a class="screen__link" href="events.html">Events</a></div>
 						<div class="screen__item"><a class="screen__link" href="event-details.html">Event Details</a></div>
-						<div class="screen__item item--active"><a class="screen__link" href="tickets.html">Tickets</a></div>
+						<div class="screen__item"><a class="screen__link" href="tickets.html">Tickets</a></div>
 						<div class="screen__item"><a class="screen__link" href="foundation.html">Foundation</a></div>
 						<div class="screen__item"><a class="screen__link" href="education.html">Education</a></div>
 						<div class="screen__item"><a class="screen__link" href="donation.html">Donation</a></div>
-						<div class="screen__item"><a class="screen__link" href="donation-details.html">Donation Details</a></div>
+						<div class="screen__item"><a class="screen__link" href="donation-details.html">Donation Details</a>
+						</div>
 						<div class="screen__item"><a class="screen__link" href="animals.html">Animals</a></div>
 						<div class="screen__item"><a class="screen__link" href="animal-details.html">Animal Details</a></div>
 						<div class="screen__item"><a class="screen__link" href="safari-tours.html">Safari Tours</a></div>
@@ -184,17 +186,19 @@
 			</div>
 			<!-- menu dropdown end-->
 			<!-- header start-->
-			<header class="header header-common">
+			<header class="header header-common ">
 				<div class="header__top">
 					<div class="row align-items-center">
-						<div class="col-6 col-lg-4"><a class="logo" href="index.html"><img class="logo__img" src="/wild-world/img/svg/logo.png" alt="logo"/></a></div>
+						<div class="col-6 col-lg-4"><a class="logo" href="index.html"><img class="logo__img"
+									src="img/logoedit_ .png" alt="logo" /></a></div>
 						<div class="col-6 col-lg-8 d-flex justify-content-end">
 							<!-- main menu start-->
 							<ul class="main-menu">
-								<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Home</span></a>
+								<li class="main-menu__item "><a class="main-menu__link"
+										href="javascript:void(0);"><span>Home</span></a>
 									<!-- sub menu start-->
 									<ul class="main-menu__sub-list">
-										<li><a href="index.html"><span>Home Zoo</span></a></li>
+										<li class="item--active"><a href="index.html"><span>Home Zoo</span></a></li>
 										<li><a href="front_2.html"> <span>Home Aquarium</span></a></li>
 										<li><a href="front_3.html"><span>Home Terrarium</span></a></li>
 										<li><a href="front_4.html"><span>Home Animal Protections</span></a></li>
@@ -203,7 +207,8 @@
 									</ul>
 									<!-- sub menu end-->
 								</li>
-								<li class="main-menu__item main-menu__item--has-child main-menu__item--active"><a class="main-menu__link" href="javascript:void(0);"><span>Pages</span></a>
+								<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link"
+										href="javascript:void(0);"><span>Animals</span></a>
 									<!-- sub menu start-->
 									<ul class="main-menu__sub-list sub-list--style-2">
 										<li><a href="about.html"><span>About</span></a></li>
@@ -215,7 +220,7 @@
 										<li><a href="membership.html"><span>Membership</span></a></li>
 										<li><a href="events.html"><span>Events</span></a></li>
 										<li><a href="event-details.html"><span>Event Details</span></a></li>
-										<li class="item--active"><a href="tickets.html"><span>Tickets</span></a></li>
+										<li><a href="tickets.html"><span>Tickets</span></a></li>
 										<li><a href="foundation.html"><span>Foundation</span></a></li>
 										<li><a href="education.html"><span>Education</span></a></li>
 										<li><a href="donation.html"><span>Donation</span></a></li>
@@ -231,8 +236,11 @@
 									</ul>
 									<!-- sub menu end-->
 								</li>
-								<li class="main-menu__item"><a class="main-menu__link" href="blog.html"><span>Blog</span></a></li>
-								<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Shop</span></a>
+								<li class="main-menu__item"><a class="main-menu__link"
+										href="blog.html"><span>Services</span></a></li>
+		
+								<li class="main-menu__item "><a class="main-menu__link"
+										href="javascript:void(0);"><span>Finances</span></a>
 									<!-- sub menu start-->
 									<ul class="main-menu__sub-list">
 										<li><a href="shop-catalog.html"><span>Shop Catalog</span></a></li>
@@ -243,29 +251,31 @@
 									</ul>
 									<!-- sub menu end-->
 								</li>
-								<li class="main-menu__item"><a class="main-menu__link" href="contacts.html"><span>Contacts</span></a></li>
-								<li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Elements</span></a>
-									<!-- sub menu start-->
-									<ul class="main-menu__sub-list sub-list--style-2">
-										<li><a href="accordion.html"><span>Accordion</span></a></li>
-										<li><a href="charts.html"><span>Charts</span></a></li>
-										<li><a href="alerts.html"><span>Alerts</span></a></li>
-										<li><a href="counters.html"><span>Counters</span></a></li>
-										<li><a href="logos.html"><span>Logos</span></a></li>
-										<li><a href="forms.html"><span>Forms</span></a></li>
-										<li><a href="tabs.html"><span>Tabs</span></a></li>
-										<li><a href="buttons.html"><span>Buttons</span></a></li>
-										<li><a href="paginations.html"><span>Paginations</span></a></li>
-										<li><a href="team.html"><span>Team</span></a></li>
-										<li><a href="breadcrumbs.html"><span>Bread Crumbs</span></a></li>
-										<li><a href="icon-list.html"><span>Icon List</span></a></li>
-										<li><a href="pricing-tables.html"><span>Pricing Tables</span></a></li>
-										<li><a href="testimonials.html"><span>Testimonials</span></a></li>
-									</ul>
-									<!-- sub menu end-->
-								</li>
+		
+								<li class="main-menu__item"><a class="main-menu__link" href="contacts.html"><span>Contact
+											Us</span></a></li>
+								<!-- <li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Elements</span></a> -->
+								<!-- sub menu start-->
+								<!-- <ul class="main-menu__sub-list sub-list--style-2">
+												<li><a href="accordion.html"><span>Accordion</span></a></li>
+												<li><a href="charts.html"><span>Charts</span></a></li>
+												<li><a href="alerts.html"><span>Alerts</span></a></li>
+												<li><a href="counters.html"><span>Counters</span></a></li>
+												<li><a href="logos.html"><span>Logos</span></a></li>
+												<li><a href="forms.html"><span>Forms</span></a></li>
+												<li><a href="tabs.html"><span>Tabs</span></a></li>
+												<li><a href="buttons.html"><span>Buttons</span></a></li>
+												<li><a href="paginations.html"><span>Paginations</span></a></li>
+												<li><a href="team.html"><span>Team</span></a></li>
+												<li><a href="breadcrumbs.html"><span>Bread Crumbs</span></a></li>
+												<li><a href="icon-list.html"><span>Icon List</span></a></li>
+												<li><a href="pricing-tables.html"><span>Pricing Tables</span></a></li>
+												<li><a href="testimonials.html"><span>Testimonials</span></a></li>
+											</ul> -->
+								<!-- sub menu end-->
+								<!-- </li> -->
 							</ul>
-							<!-- main menu end--><a class="header__button" href="#">Tickets</a>
+							<!-- main menu end--><a class="header__button" href="#">Log In</a>
 							<!-- menu-trigger start-->
 							<div class="hamburger">
 								<div class="hamburger-box">
@@ -276,39 +286,41 @@
 						</div>
 					</div>
 				</div>
-				<div class="header__lower">
-					<div class="row">
-						<div class="col-auto d-flex align-items-center">
-							<ul class="lower-menu">
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Membership</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Education</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Map Zoo</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Events</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Donate</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Foundation</a></li>
-							</ul>
-							<!-- lang select start-->
-							<ul class="lang-select">
-								<li class="lang-select__item lang-select__item--active"><span>English</span>
-									<ul class="lang-select__sub-list">
-										<li><a href="#">French</a></li>
-										<li><a href="#">Spanish</a></li>
-										<li><a href="#">Deutsch</a></li>
-										<li><a href="#">Russian</a></li>
+				<!-- <div class="header__lower">
+							<div class="row">
+								<div class="col-auto d-flex align-items-center">
+									<ul class="lower-menu">
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Membership</a></li>
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Education</a></li>
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Map Zoo</a></li>
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Events</a></li>
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Donate</a></li>
+										<li class="lower-menu__item"><a class="lower-menu__link" href="#">Foundation</a></li>
+									</ul> -->
+				<!-- lang select start-->
+				<!-- <ul class="lang-select">
+										<li class="lang-select__item lang-select__item--active"><span>English</span>
+											<ul class="lang-select__sub-list">
+												<li><a href="#">French</a></li>
+												<li><a href="#">Spanish</a></li>
+												<li><a href="#">Deutsch</a></li>
+												<li><a href="#">Russian</a></li>
+											</ul>
+										</li>
+									</ul> -->
+				<!-- lang select end-->
+				<!-- <ul class="header__socials">
+										<li><a class="item--facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+										<li><a class="item--twitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+										<li><a class="item--youtube" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+										<li><a class="item--instagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 									</ul>
-								</li>
-							</ul>
-							<!-- lang select end-->
-							<ul class="header__socials">
-								<li><a class="item--facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a class="item--twitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a class="item--youtube" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-								<li><a class="item--instagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+								</div>
+							</div>
+						</div> -->
 			</header>
+			<!-- header end-->
+
 			<!-- header end-->
 			<main class="main">
 				<!-- promo start-->
@@ -341,6 +353,7 @@
 				</div>
 				<!-- cta end-->
 				<!-- section start-->
+				
 				<section class="section">
 					<div class="container">
 						<div class="row bottom-50">
@@ -357,7 +370,7 @@
 										<div class="table__cell"><strong>Tickets</strong></div>
 										<div class="table__cell"><strong>Details</strong></div>
 										<div class="table__cell"><strong>Zoo</strong></div>
-										<div class="table__cell"><strong>Museum & Aquarium</strong></div>
+										<div class="table__cell"><strong>Museum</strong></div>
 									</div>
 									<div class="table__body">
 										<div class="table__row">
@@ -470,8 +483,10 @@
 				</section>
 				<!-- section end-->
 				<!-- section start-->
-				<section class="section">
-					<div class="container">
+
+				
+				<!-- <section class="section"> -->
+					<!-- <div class="container">
 						<div class="row bottom-50 align-items-end">
 							<div class="col-lg-8">
 								<div class="heading heading--primary heading--style-2"><span class="heading__pre-title">Events</span>
@@ -514,12 +529,12 @@
 						<div class="row">
 							<div class="col-12 text-center"><a class="button button--primary" href="events.html">More Events</a></div>
 						</div>
-					</div>
-				</section>
+					</div> -->
+				<!-- </section> -->
 				<!-- section end-->
 				<!-- section start-->
 				<section class="section no-padding-top no-padding-bottom">
-					<div class="row no-gutters">
+					<!-- <div class="row no-gutters">
 						<div class="col-lg-6"><a class="action-block" href="#">
 							<div class="action-block__inner"><img class="img--bg" src="img/action-block_1.jpg" alt="img"/>
 								<h3 class="action-block__title"><span>The Biggest Aquarium</span><br/> <span>in America</span></h3>
@@ -528,73 +543,88 @@
 							<div class="action-block__inner"><img class="img--bg" src="img/action-block_2.jpg" alt="img"/>
 								<h3 class="action-block__title"><span>Amazing Terrarium</span><br/> <span>in Europe</span></h3>
 							</div></a></div>
-					</div>
+					</div> -->
 				</section>
 				<!-- section end-->
 			</main>
 			<!-- footer start-->
-			<footer class="footer"><img class="footer__bg img--bg" src="img/background__layout.png" alt="bg"/>
+			<footer class="footer"><img class="footer__bg img--bg" src="img/background__layout.png" alt="bg" />
 				<div class="container">
 					<div class="row bottom-50">
-						<div class="col-md-5 col-xl-4 text-center text-md-left"><a class="logo logo--footer" href="index.html"><img class="logo__img" src="img/logo_zoo_white.png" alt="logo"/></a>
+						<div class="col-md-5 col-xl-4 text-center text-md-left"><a class="logo logo--footer" href="index.html"><img
+									class="logo__img" src="img/logo.jpeg" alt="logo" /></a>
 							<div class="footer__details">
-								<p><strong>Location:</strong> <span>av. Washington 165, NY CA 54003</span></p>
-								<p><strong>Phone:</strong> <a href="tel:+31859644725">+31 85 964 47 25</a> <a href="tel:+31859644725">+31 65 792 63 11</a></p>
+								<p><strong>Location:</strong> <span>Bangladesh National Zoo, Mirpur 2, Dhaka</span></p>
+								<p><strong>Phone:</strong> <a href="tel:+31859644725">+31 85 964 47 25</a> <a
+										href="tel:+31859644725">+31 65 792 63 11</a></p>
 								<p><strong>Email:</strong> <a href="mailto:info@animalsworld.com">info@animalsworld.com</a></p>
 								<p><strong>Openning hours:</strong> <span>9:00 AM - 5:00 PM</span></p>
 							</div>
 							<ul class="socials">
-								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-facebook"
+											aria-hidden="true"></i></a></li>
+								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-twitter"
+											aria-hidden="true"></i></a></li>
+								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-youtube-play"
+											aria-hidden="true"></i></a></li>
+								<li class="socials__item"><a class="socials__link" href="#"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
 						<div class="col-md-7 col-xl-5 d-none d-md-block">
-							<h6 class="footer__title">Menu & Links</h6>
-							<ul class="footer-menu">
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Home</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Membership </a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Pages</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Education</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Animals</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Support</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Schedule</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Events</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Gallery</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Blog</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Contacts</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Donate</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Foundation</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Tickets</a></li>
-							</ul>
-							<ul class="footer-submenu">
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Documents</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Association of Zoo</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Aqurium</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terrarium</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terra Park</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Cooperation</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Libriry</a></li>
-							</ul>
+							<!-- <h6 class="footer__title">Menu & Links</h6> -->
+							<!-- <ul class="footer-menu">
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Home</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Membership </a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Pages</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Education</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Animals</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Support</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Schedule</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Events</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Gallery</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Blog</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Contacts</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Donate</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Foundation</a></li>
+											<li class="footer-menu__item"><a class="footer-menu__link" href="#">Tickets</a></li>
+										</ul>
+										<ul class="footer-submenu">
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Documents</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Association of Zoo</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Aqurium</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terrarium</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terra Park</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Cooperation</a></li>
+											<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Libriry</a></li>
+										</ul> -->
 						</div>
 						<div class="col-lg-3 d-none d-xl-block">
 							<h6 class="footer__title"><span>Instagram</span> <i class="fa fa-instagram" aria-hidden="true"></i>
 							</h6>
 							<div class="footer-instagram"><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-1.jpg" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-2.jpg" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-3.jpg" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-4.jpg" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-5.jpg" alt="ig"/></div></a><a class="footer-instagram__item" href="#">
-								<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-6.jpg" alt="ig"/></div></a></div>
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-1.jpg" alt="ig" /></div>
+								</a><a class="footer-instagram__item" href="#">
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-2.jpg" alt="ig" /></div>
+								</a><a class="footer-instagram__item" href="#">
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-3.jpg" alt="ig" /></div>
+								</a><a class="footer-instagram__item" href="#">
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-4.jpg" alt="ig" /></div>
+								</a><a class="footer-instagram__item" href="#">
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-5.jpg" alt="ig" /></div>
+								</a><a class="footer-instagram__item" href="#">
+									<div class="footer-instagram__img"><img class="img--bg" src="img/f_ig-6.jpg" alt="ig" /></div>
+								</a></div>
 						</div>
 					</div>
 					<div class="row align-items-center">
 						<div class="col-sm-6 text-center text-sm-left">
-							<div class="footer-privacy"><a class="footer-privacy__link" href="#">Privacy Policy</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="#">Term and Condision</a></div>
+							<div class="footer-privacy"><a class="footer-privacy__link" href="#">Privacy Policy</a><span
+									class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="#">Term and
+									Condision</a></div>
 						</div>
-						<div class="col-sm-6 text-center text-sm-right"><a class="footer__link" href="#"><img src="img/footer-logo.png" alt="logo"/></a></div>
+						<div class="col-sm-6 text-center text-sm-right"><a class="footer__link" href="#"><img src="img/logo.jpeg"
+									alt="logo" /></a></div>
 					</div>
 				</div>
 			</footer>
