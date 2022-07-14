@@ -1,14 +1,26 @@
 <?php
-session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
-
-$conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
+  $conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+    if(isset($_POST['R_PAPERLINK'])) {
+      $R_PAPERLINK = $_POST['R_PAPERLINK'];
+      $R_TOPIC = $_POST['R_TOPIC'];
+      $R_NAME = $_POST['R_NAME'];
+      $R_MAIL = $_POST['R_MAIL'];
+      $R_INSTITUTION = $_POST['R_INSTITUTION'];
+      $R_PHONENO = $_POST['R_PHONENO'];
+      $sql = "insert into RESEARCH (R_PAPERLINK, R_TOPIC, R_NAME, R_MAIL,R_INSTITUTION,R_PHONENO) values ('$R_PAPERLINK',' $R_TOPIC','$R_NAME','$R_MAIL','$R_INSTITUTION','$R_PHONENO')";
+      $stid = oci_parse($conn, $sql);
+      $r = oci_execute($stid);
+    }
+  }
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +30,11 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food</title>
+    <title>RESEARCH_form</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- favicon icon added  -->
-     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
-
-     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-    />
+      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -47,6 +46,7 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="food_form.css">
 
 
     <!-- web-font loader-->
@@ -637,64 +637,88 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-
-       <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
-  
-              <div class="container pt-5 pb-5">
-        <div class="card">
-          <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Food Info:</h1>
-            <a href="food_form.php"
-              ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Foods
-              </button></a
-            >
-          </div>
-        </div>
-      </div>
-                  
-                </div>
-
-       <div class="card-body" style="margin-top:25px">
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <!-- <th>SI No</th> -->
-                <th>Food Name</th>
-                <th>Quantity</th>
-                <th>Food type</th>
-                <th>Expiration date</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                   <?php
-                                $sql = "select *from food";
-                                $stid = oci_parse($conn, $sql);
-                                $r = oci_execute($stid);
-                                while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
-                                {
-                
-                                echo "
-                                <tr>
-                                  <td>" . $row["FOODNAME"] . "</td>
-                                  <td>" . $row["QUANTITY"] . "</td>
-                                  <td>" . $row["FOODTYPE"] . "</td>
-                                  <td>" . $row["EXPIRATIONDATE"] . "</td>
-                                  </tr>
-                                ";
-                                }
-
-
-              ?>
-
+      <div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
-      
-        </tbody>
-    </table>
+            <div class="card mb-3">
+                <h5 class="text-center mb-4">Add RESEARCH Info</h5>
+                <form class="form-card" action="Research_form.php" method="post">
 
-  
-   </div>
+
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_PAPERLINK" class="form-label">
+              <h6 class="mt-3">Research PAPERLINK <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="R_PAPERLINK" name="R_PAPERLINK" placeholder="Enter PAPERLINK" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                   
+                  <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_TOPIC" class="form-label">
+              <h6 class="mt-3">Research TOPIC<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="R_TOPIC" name="R_TOPIC" placeholder="Enter Research TOPIC" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                  <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_NAME" class="form-label">
+              <h6 class="mt-3">Research Name <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="R_NAME" name="R_NAME" placeholder="Enter researcher Name" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_MAIL" class="form-label">
+              <h6 class="mt-3">Email<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="email" id="R_MAIL" name="R_MAIL" placeholder="Enter email" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_INSTITUTION" class="form-label">
+              <h6 class="mt-3">Institute <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="R_INSTITUTION" name="R_INSTITUTION" placeholder="Enter Institute" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="R_PHONENO" class="form-label">
+              <h6 class="mt-3">Researcher Phoneno<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<div class="input-group input-daterange">
+          <input type="text" id="R_PHONENO" name="R_PHONENO" placeholder="Enter Phone number" class="form-control text-left mr-2">         
+          <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                  
+                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -1569,6 +1593,7 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();

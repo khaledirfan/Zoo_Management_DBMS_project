@@ -18,7 +18,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food</title>
+    <title>research</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -643,10 +643,10 @@ if (!$conn) {
               <div class="container pt-5 pb-5">
         <div class="card">
           <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Food Info:</h1>
-            <a href="food_form.php"
+            <h1 class="d-inline-block text-white ms-4">research Info:</h1>
+            <a href="research_form.php"
               ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Foods
+                + Add research work
               </button></a
             >
           </div>
@@ -660,16 +660,18 @@ if (!$conn) {
         <thead>
             <tr>
                 <!-- <th>SI No</th> -->
-                <th>Food Name</th>
-                <th>Quantity</th>
-                <th>Food type</th>
-                <th>Expiration date</th>
+                <th>PAPERLINK</th>
+                <th>TOPIC</th>
+                <th>Researcher NAME</th>
+                <th>Researcher_MAIL</th>
+                <th>Researcher_INSTITUTION</th>
+                <th>Researcher_PHONENO</th>
             </tr>
         </thead>
         <tbody>
 
                    <?php
-                                $sql = "select *from food";
+                                $sql = "select *from RESEARCH";
                                 $stid = oci_parse($conn, $sql);
                                 $r = oci_execute($stid);
                                 while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
@@ -677,10 +679,12 @@ if (!$conn) {
                 
                                 echo "
                                 <tr>
-                                  <td>" . $row["FOODNAME"] . "</td>
-                                  <td>" . $row["QUANTITY"] . "</td>
-                                  <td>" . $row["FOODTYPE"] . "</td>
-                                  <td>" . $row["EXPIRATIONDATE"] . "</td>
+                                  <td>" . $row["R_PAPERLINK"] . "</td>
+                                  <td>" . $row["R_TOPIC"] . "</td>
+                                  <td>" . $row["R_NAME"] . "</td>
+                                  <td>" . $row["R_MAIL"] . "</td>
+                                  <td>" . $row["R_INSTITUTION"] . "</td>
+                                  <td>" . $row["R_PHONENO"] . "</td>
                                   </tr>
                                 ";
                                 }
