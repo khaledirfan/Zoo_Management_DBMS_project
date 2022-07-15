@@ -5,12 +5,13 @@ if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['FOODNAME'])) {
-      $FOODNAME = $_POST['FOODNAME'];
-      $QUANTITY = $_POST['QUANTITY'];
-      $FOODTYPE = $_POST['FOODTYPE'];
-      $EXPIRATIONDATE = $_POST['EXPIRATIONDATE'];
-      $sql = "insert into food (FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values ('$FOODNAME',' $QUANTITY','$FOODTYPE','$EXPIRATIONDATE')";
+    if(isset($_POST['TAX_INCOME_ID'])) {
+      $TAX_INCOME_ID = $_POST['TAX_INCOME_ID'];
+      $SOURCE = $_POST['SOURCE'];
+      $INCOME_TYPE = $_POST['INCOME_TYPE'];
+      $INCOME_DATE = $_POST['INCOME_DATE'];
+      $AMOUNT = $_POST['AMOUNT'];
+      $sql = "insert into INCOME (TAX_INCOME_ID,SOURCE,INCOME_TYPE,INCOME_DATE,AMOUNT) values ('$TAX_INCOME_ID','$SOURCE','$INCOME_TYPE','$INCOME_DATE','$AMOUNT')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -28,7 +29,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food_form</title>
+    <title>Income_form</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -640,51 +641,62 @@ if (!$conn) {
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
             <div class="card mb-3">
-                <h5 class="text-center mb-4">Add Food Info</h5>
-                <form class="form-card" action="food_form.php" method="post">
+                <h5 class="text-center mb-4">Add Income Info</h5>
+                <form class="form-card" action="income_form.php" method="post">
 
 
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODNAME" class="form-label">
-              <h6 class="mt-3">Food Name <font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="TAX_INCOME_ID" class="form-label">
+              <h6 class="mt-3">TAX INCOME ID <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="FOODNAME" name="FOODNAME" placeholder="Enter Food Name" class="form-control text-left mr-2">         
+          <input type="text" id="TAX_INCOME_ID" name="TAX_INCOME_ID" placeholder="Enter TAX_INCOME_ID" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="QUANTITY" class="form-label">
-              <h6 class="mt-3">Quantity (kgs)<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_TYPE" class="form-label">
+              <h6 class="mt-3">INCOME TYPE<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="QUANTITY" name="QUANTITY" placeholder="Enter amount" class="form-control text-left mr-2">         
+          <input type="text" id="INCOME_TYPE" name="INCOME_TYPE" placeholder="Enter INCOME TYPE" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SOURCE" class="form-label">
+              <h6 class="mt-3">SOURCE<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="SOURCE" name="SOURCE" placeholder="Enter SOURCE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
 
                         <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODTYPE" class="form-label">
-              <h6 class="mt-3">Food Type <font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_DATE" class="form-label">
+              <h6 class="mt-3">INCOME DATE <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="FOODTYPE" name="FOODTYPE" placeholder="Enter Food Type" class="form-control text-left mr-2">         
+          <input type="date" id="INCOME_DATE" name="INCOME_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
 
                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
-              <h6 class="mt-3">Expiration Date<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="AMOUNT" class="form-label">
+              <h6 class="mt-3">AMOUNT<font color="ff0000">*</font></h6>
             </label>
 			  
 		<div class="input-group input-daterange">
-          <input type="date" id="EXPIRATIONDATE" name="EXPIRATIONDATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="text" id="AMOUNT" name="AMOUNT" placeholder="Enter AMOUNT" class="form-control text-left mr-2">         
           <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>

@@ -5,12 +5,16 @@ if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['FOODNAME'])) {
-      $FOODNAME = $_POST['FOODNAME'];
-      $QUANTITY = $_POST['QUANTITY'];
-      $FOODTYPE = $_POST['FOODTYPE'];
-      $EXPIRATIONDATE = $_POST['EXPIRATIONDATE'];
-      $sql = "insert into food (FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values ('$FOODNAME',' $QUANTITY','$FOODTYPE','$EXPIRATIONDATE')";
+    if(isset($_POST['EMPLOYEE_ID'])) {
+      $EMPLOYEE_ID = $_POST['EMPLOYEE_ID'];
+      $EMPLOYEE_NAME = $_POST['EMPLOYEE_NAME'];
+      $GENDER = $_POST['GENDER'];
+      $DOB = $_POST['DOB'];
+      $JOB_TYPE = $_POST['JOB_TYPE'];
+      $DESIGNATION = $_POST['DESIGNATION'];
+      $SALARY = $_POST['SALARY'];
+      $JOINING_DATE = $_POST['JOINING_DATE'];
+      $sql = "insert into employee (EMPLOYEE_ID,EMPLOYEE_NAME,GENDER,DOB,JOB_TYPE,DESIGNATION,SALARY,JOINING_DATE) values ('$EMPLOYEE_ID','$EMPLOYEE_NAME','$GENDER','$DOB','$JOB_TYPE','$DESIGNATION','$SALARY','$JOINING_DATE')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -28,7 +32,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food_form</title>
+    <title>employee_form</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -640,51 +644,96 @@ if (!$conn) {
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
             <div class="card mb-3">
-                <h5 class="text-center mb-4">Add Food Info</h5>
-                <form class="form-card" action="food_form.php" method="post">
+                <h5 class="text-center mb-4">Add Employee Info</h5>
+                <form class="form-card" action="employee_form.php" method="post">
 
 
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODNAME" class="form-label">
-              <h6 class="mt-3">Food Name <font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EMPLOYEE_ID" class="form-label">
+              <h6 class="mt-3">EMPLOYEE ID <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="FOODNAME" name="FOODNAME" placeholder="Enter Food Name" class="form-control text-left mr-2">         
+          <input type="text" id="EMPLOYEE_ID" name="EMPLOYEE_ID" placeholder="Enter employee id" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="QUANTITY" class="form-label">
-              <h6 class="mt-3">Quantity (kgs)<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EMPLOYEE_NAME" class="form-label">
+              <h6 class="mt-3">Employee Name<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="QUANTITY" name="QUANTITY" placeholder="Enter amount" class="form-control text-left mr-2">         
+          <input type="text" id="EMPLOYEE_NAME" name="EMPLOYEE_NAME" placeholder="Enter employee name" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
+
 
                         <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODTYPE" class="form-label">
-              <h6 class="mt-3">Food Type <font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENDER" class="form-label">
+              <h6 class="mt-3">Gender <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="FOODTYPE" name="FOODTYPE" placeholder="Enter Food Type" class="form-control text-left mr-2">         
+          <input type="text" id="GENDER" name="GENDER" placeholder="Enter gender" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
 
                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
-              <h6 class="mt-3">Expiration Date<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="DOB" class="form-label">
+              <h6 class="mt-3">DOB <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="date" id="DOB" name="DOB" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="JOB_TYPE" class="form-label">
+              <h6 class="mt-3">Job_type<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="JOB_TYPE" name="JOB_TYPE" placeholder="Enter JOB TYPE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="DESIGNATION" class="form-label">
+              <h6 class="mt-3">Designation<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="DESIGNATION" name="DESIGNATION" placeholder="Enter DESIGNATION" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SALARY" class="form-label">
+              <h6 class="mt-3">SALARY<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="SALARY" name="SALARY" placeholder="Enter SALARY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="JOINING_DATE" class="form-label">
+              <h6 class="mt-3">Joining Date<font color="ff0000">*</font></h6>
             </label>
 			  
 		<div class="input-group input-daterange">
-          <input type="date" id="EXPIRATIONDATE" name="EXPIRATIONDATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="date" id="JOINING_DATE" name="JOINING_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
           <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>

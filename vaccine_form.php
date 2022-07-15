@@ -5,12 +5,16 @@ if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['FOODNAME'])) {
-      $FOODNAME = $_POST['FOODNAME'];
-      $QUANTITY = $_POST['QUANTITY'];
-      $FOODTYPE = $_POST['FOODTYPE'];
-      $EXPIRATIONDATE = $_POST['EXPIRATIONDATE'];
-      $sql = "insert into food (FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values ('$FOODNAME',' $QUANTITY','$FOODTYPE','$EXPIRATIONDATE')";
+    if(isset($_POST['VACCINE_ID'])) {
+      $VACCINE_ID = $_POST['VACCINE_ID'];
+      $VACCINE_NAME = $_POST['VACCINE_NAME'];
+      $ARRIVAL_DATE = $_POST['ARRIVAL_DATE'];
+      $TYPE = $_POST['TYPE'];
+      $ENVIRONMENT_TYPE = $_POST['ENVIRONMENT_TYPE'];
+      $CURE_DISEASE = $_POST['CURE_DISEASE'];
+      $EXPIRY_DATE = $_POST['EXPIRY_DATE'];
+      $PRODUCTION_DATE = $_POST['PRODUCTION_DATE'];
+      $sql = "insert into vaccine (VACCINE_ID,VACCINE_NAME,ARRIVAL_DATE,TYPE,ENVIRONMENT_TYPE,CURE_DISEASE,EXPIRY_DATE,PRODUCTION_DATE) values ('$VACCINE_ID','$VACCINE_NAME', '$ARRIVAL_DATE', '$TYPE', '$ENVIRONMENT_TYPE', '$CURE_DISEASE', '$EXPIRY_DATE', '$PRODUCTION_DATE')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -640,51 +644,112 @@ if (!$conn) {
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
             <div class="card mb-3">
-                <h5 class="text-center mb-4">Add Food Info</h5>
-                <form class="form-card" action="food_form.php" method="post">
+                <h5 class="text-center mb-4">Add Vaccine Info</h5>
+                <form class="form-card" action="vaccine_form.php" method="post">
 
 
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODNAME" class="form-label">
-              <h6 class="mt-3">Food Name <font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VACCINE_ID" class="form-label">
+              <h6 class="mt-3">VACCINE_ID<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="FOODNAME" name="FOODNAME" placeholder="Enter Food Name" class="form-control text-left mr-2">         
+          <input type="text" id="VACCINE_ID" name="VACCINE_ID" placeholder="Enter VACCINE_ID" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
 
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="QUANTITY" class="form-label">
-              <h6 class="mt-3">Quantity (kgs)<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="QUANTITY" name="QUANTITY" placeholder="Enter amount" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FOODTYPE" class="form-label">
-              <h6 class="mt-3">Food Type <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FOODTYPE" name="FOODTYPE" placeholder="Enter Food Type" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
 
 
                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
-              <h6 class="mt-3">Expiration Date<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VACCINE_NAME" class="form-label">
+              <h6 class="mt-3">VACCINE_NAME<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="VACCINE_NAME" name="VACCINE_NAME" placeholder="Enter VACCINE_NAME" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ARRIVAL_DATE" class="form-label">
+              <h6 class="mt-3">ARRIVAL_DATE<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="date" id="QUANTITY" name="ARRIVAL_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="TYPE" class="form-label">
+              <h6 class="mt-3">Type <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="TYPE" name="TYPE" placeholder="Enter Vaccine Type" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ENVIRONMENT_TYPE" class="form-label">
+              <h6 class="mt-3">ENVIRONMENT_TYPE <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ENVIRONMENT_TYPE" name="ENVIRONMENT_TYPE" placeholder="Enter ENVIRONMENT_TYPE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CURE_DISEASE" class="form-label">
+              <h6 class="mt-3">CURE_DISEASE <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CURE_DISEASE" name="CURE_DISEASE" placeholder="Enter CURE_DISEASE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRY_DATE" class="form-label">
+              <h6 class="mt-3">EXPIRY_DATE<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="date" id="EXPIRY_DATE" name="EXPIRY_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PRODUCTION_DATE" class="form-label">
+              <h6 class="mt-3">PRODUCTION_DATE<font color="ff0000">*</font></h6>
             </label>
 			  
 		<div class="input-group input-daterange">
-          <input type="date" id="EXPIRATIONDATE" name="EXPIRATIONDATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="date" id="PRODUCTION_DATE" name="PRODUCTION_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
           <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
