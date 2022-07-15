@@ -18,7 +18,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food</title>
+    <title>Complaint</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -638,15 +638,15 @@ if (!$conn) {
 
       <!-- main part start  -->
 
-       <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
+       <div class="bg-dark" style="margin-top: 150px; margin-bottom: 100px;">
   
               <div class="container pt-5 pb-5">
         <div class="card">
           <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Food Info:</h1>
-            <a href="food_form.php"
+            <h1 class="d-inline-block text-white ms-4">Complaint Info:</h1>
+            <a href="complaint_form.php"
               ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Foods
+                + Add Complaints
               </button></a
             >
           </div>
@@ -660,16 +660,16 @@ if (!$conn) {
         <thead>
             <tr>
                 <!-- <th>SI No</th> -->
-                <th>Food Name</th>
-                <th>Quantity</th>
-                <th>Food type</th>
-                <th>Expiration date</th>
+                <th>Complaint No</th>
+                <th>Complaint Date</th>
+                <th>Complaint Type</th>
+                <th>Complaint Details</th>
             </tr>
         </thead>
         <tbody>
 
                    <?php
-                                $sql = "select *from food";
+                                $sql = "select *from COMPLAINTS";
                                 $stid = oci_parse($conn, $sql);
                                 $r = oci_execute($stid);
                                 while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
@@ -677,10 +677,10 @@ if (!$conn) {
                 
                                 echo "
                                 <tr>
-                                  <td>" . $row["FOODNAME"] . "</td>
-                                  <td>" . $row["QUANTITY"] . "</td>
-                                  <td>" . $row["FOODTYPE"] . "</td>
-                                  <td>" . $row["EXPIRATIONDATE"] . "</td>
+                                  <td>" . $row["COMPLAINT_NO"] . "</td>
+                                  <td>" . $row["COMPLAINT_DATE"] . "</td>
+                                  <td>" . $row["COMPLAINT_TYPE"] . "</td>
+                                  <td>" . $row["COMPLAINT_DETAILS"] . "</td>
                                   </tr>
                                 ";
                                 }

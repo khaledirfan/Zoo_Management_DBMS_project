@@ -1,14 +1,31 @@
 <?php
-session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
-
-$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
-}
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+    if(isset($_POST['CAGE_LOCATION'])) {
+      //$CAGE_NO = $_POST['CAGE_NO'];
+      
+      $CAGE_LOCATION = $_POST['CAGE_LOCATION'];
+      $MAX_CAPACITY = $_POST['MAX_CAPACITY'];
 
+      $CLEANING_INTERVAL = $_POST['CLEANING_INTERVAL'];
+      $CAGE_HEIGHT = $_POST['CAGE_HEIGHT'];
+      $CAGE_WEIGHT = $_POST['CAGE_WEIGHT'];
+      $CAGE_LENGTH = $_POST['CAGE_LENGTH'];
+      $CLEAN_STATUS = $_POST['CLEAN_STATUS'];
+      $LAST_CLEANING_DATE = $_POST['LAST_CLEANING_DATE'];
+      $sql = "insert into CAGE (CAGE_NO,CAGE_LOCATION,MAX_CAPACITY,CLEANING_INTERVAL,CAGE_HEIGHT,CAGE_WEIGHT,CAGE_LENGTH,CLEAN_STATUS,LAST_CLEANING_DATE) values (CAGE_CAGE_NO_SEQ.NEXTVAL,'$CAGE_LOCATION','$MAX_CAPACITY','$CLEANING_INTERVAL','$CAGE_HEIGHT','$CAGE_WEIGHT','$CAGE_LENGTH','$CLEAN_STATUS','$LAST_CLEANING_DATE')";
+      $stid = oci_parse($conn, $sql);
+      $r = oci_execute($stid);
+    }
+  }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +35,11 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>food</title>
+    <title>complaint_form</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- favicon icon added  -->
-     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
-
-     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-    />
+      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -47,6 +51,7 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="food_form.css">
 
 
     <!-- web-font loader-->
@@ -637,64 +642,132 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-
-       <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
-  
-              <div class="container pt-5 pb-5">
-        <div class="card">
-          <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Food Info:</h1>
-            <a href="food_form.php"
-              ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Foods
-              </button></a
-            >
-          </div>
-        </div>
-      </div>
-                  
-                </div>
-
-       <div class="card-body" style="margin-top:25px">
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <!-- <th>SI No</th> -->
-                <th>Food Name</th>
-                <th>Quantity</th>
-                <th>Food type</th>
-                <th>Expiration date</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                   <?php
-                                $sql = "select *from food";
-                                $stid = oci_parse($conn, $sql);
-                                $r = oci_execute($stid);
-                                while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
-                                {
-                
-                                echo "
-                                <tr>
-                                  <td>" . $row["FOODNAME"] . "</td>
-                                  <td>" . $row["QUANTITY"] . "</td>
-                                  <td>" . $row["FOODTYPE"] . "</td>
-                                  <td>" . $row["EXPIRATIONDATE"] . "</td>
-                                  </tr>
-                                ";
-                                }
-
-
-              ?>
-
+      <div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
-      
-        </tbody>
-    </table>
+            <div class="card mb-3">
+                <h5 class="text-center mb-4">Enter Cage info</h5>
+                <form class="form-card" action="cage_form.php" method="post">
 
-  
-   </div>
+
+
+
+                    <!-- <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
+              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
+                       
+                    </div>
+                   </div> -->
+
+
+                    <!-- <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_NO" class="form-label">
+              <h6 class="mt-3">CAGE_NO<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_NO	" name="CAGE_NO" placeholder="CAGE_NO" class="form-control text-left mr-2">         
+                       
+                    </div>
+                   </div> -->
+
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_LOCATION" class="form-label">
+              <h6 class="mt-3">CAGE_LOCATION <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_LOCATION" name="CAGE_LOCATION" placeholder="CAGE_LOCATION" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="MAX_CAPACITY" class="form-label">
+              <h6 class="mt-3">MAX_CAPACITY <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="MAX_CAPACITY" name="MAX_CAPACITY" placeholder="MAX_CAPACITY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CLEANING_INTERVAL" class="form-label">
+              <h6 class="mt-3">CLEANING_INTERVAL <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CLEANING_INTERVAL" name="CLEANING_INTERVAL" placeholder="CLEANING_INTERVAL" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_HEIGHT" class="form-label">
+              <h6 class="mt-3">CAGE_HEIGHT <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_HEIGHT" name="CAGE_HEIGHT" placeholder="CAGE_HEIGHT" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_WEIGHT" class="form-label">
+              <h6 class="mt-3">CAGE_WEIGHT <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_WEIGHT" name="CAGE_WEIGHT" placeholder="CAGE_WEIGHT" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_LENGTH" class="form-label">
+              <h6 class="mt-3">CAGE_LENGTH <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_LENGTH" name="CAGE_LENGTH" placeholder="CAGE_LENGTH" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CLEAN_STATUS" class="form-label">
+              <h6 class="mt-3">CLEAN_STATUS <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CLEAN_STATUS" name="CLEAN_STATUS" placeholder="CLEAN_STATUS" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="LAST_CLEANING_DATE" class="form-label">
+              <h6 class="mt-3"> LAST_CLEANING_DATE<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<div class="input-group input-daterange">
+          <input type="date" id="LAST_CLEANING_DATE" name="LAST_CLEANING_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                  
+                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -1569,6 +1642,7 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
