@@ -5,8 +5,8 @@ if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['FS_ID'])) {
-      $FS_ID = $_POST['FS_ID'];
+    if(isset($_POST['FS_NAME'])) {
+       
       $FS_NAME = $_POST['FS_NAME'];
       $FS_GENDER = $_POST['FS_GENDER'];
       $FS_DOB = $_POST['FS_DOB'];
@@ -16,7 +16,7 @@ if (!$conn) {
       $FS_FOODAMOUNT = $_POST['FS_FOODAMOUNT'];
       $FS_FOODPRICE = $_POST['FS_FOODPRICE'];
       $FS_DATE = $_POST['FS_DATE'];
-      $sql = "insert into FOOD_SUPPLIER (FS_ID, FS_NAME, FS_GENDER,FS_DOB,FS_PHONENO,FS_FOODSOURCE,FS_FOODSUPPLIED,FS_FOODAMOUNT,FS_FOODPRICE,FS_DATE) values ('$FS_ID',' $FS_NAME','$FS_GENDER','$FS_DOB','$FS_PHONENO','$FS_FOODSOURCE','$FS_FOODSUPPLIED','$FS_FOODAMOUNT','$FS_FOODPRICE','$FS_DATE')";
+      $sql = "insert into FOOD_SUPPLIER (FS_ID, FS_NAME, FS_GENDER,FS_DOB,FS_PHONENO,FS_FOODSOURCE,FS_FOODSUPPLIED,FS_FOODAMOUNT,FS_FOODPRICE,FS_DATE) values (FOOD_SUPPLIER_FS_ID_sequence.nextval,' $FS_NAME','$FS_GENDER','$FS_DOB','$FS_PHONENO','$FS_FOODSOURCE','$FS_FOODSUPPLIED','$FS_FOODAMOUNT','$FS_FOODPRICE','$FS_DATE')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -652,15 +652,7 @@ if (!$conn) {
 
 
 
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FS_ID" class="form-label">
-              <h6 class="mt-3">FoodSupplier ID <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FS_ID" name="FS_ID" placeholder="Enter food supplier ID " class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
+                    
 
 
                     <div class="row justify-content-between text-left">
