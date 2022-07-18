@@ -694,7 +694,7 @@ if (!$conn) {
                    </div> -->
 
                    <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
-              <h6 class="mt-3">Joining Date<font color="ff0000">*</font></h6>
+              <h6 class="mt-3">Expiration date<font color="ff0000">*</font></h6>
             </label>
 			  
 		<!-- <div class="input-group input-daterange"> -->
