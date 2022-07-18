@@ -48,6 +48,11 @@ if (!$conn) {
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="food_form.css">
 
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+
 
     <!-- web-font loader-->
     <script>
@@ -681,15 +686,24 @@ if (!$conn) {
 
 
                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DATE" class="form-label">
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DATE" class="form-label">
               <h6 class="mt-3"> Date<font color="ff0000">*</font></h6>
             </label>
 			  
 		<div class="input-group input-daterange">
           <input type="date" id="COMPLAINT_DATE" name="COMPLAINT_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
-          <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+          
                     </div>
+                   </div> -->
+
+                                      <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DATE" class="form-label">
+              <h6 class="mt-3">date<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<!-- <div class="input-group input-daterange"> -->
+          <input type="text" id="datepicker" name="COMPLAINT_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+          
+                    <!-- </div> -->
                    </div>
                   
                    <button type="submit"  class="btn btn-primary mt-3">Submit</button>
@@ -1579,5 +1593,18 @@ if (!$conn) {
         $('#example').DataTable();
     });
     </script>
+
+    <!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
   </body>
 </html>
