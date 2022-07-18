@@ -14,7 +14,7 @@ if (!$conn) {
       $DESIGNATION = $_POST['DESIGNATION'];
       $SALARY = $_POST['SALARY'];
       $JOINING_DATE = $_POST['JOINING_DATE'];
-      $sql = "insert into employee (EMPLOYEE_ID,EMPLOYEE_NAME,GENDER,DOB,JOB_TYPE,DESIGNATION,SALARY,JOINING_DATE) values ('$EMPLOYEE_ID','$EMPLOYEE_NAME','$GENDER','$DOB','$JOB_TYPE','$DESIGNATION','$SALARY','$JOINING_DATE')";
+      $sql = "insert into employee (EMPLOYEE_ID,EMPLOYEE_NAME,GENDER,DOB,JOB_TYPE,DESIGNATION,SALARY,JOINING_DATE) values ('$EMPLOYEE_ID','$EMPLOYEE_NAME','$GENDER',to_date('$DOB','mm-dd-yyyy'),'$JOB_TYPE','$DESIGNATION','$SALARY',to_date('$JOINING_DATE','mm-dd-yyyy'))";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -49,6 +49,10 @@ if (!$conn) {
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
 
     <!-- web-font loader-->
@@ -688,7 +692,7 @@ if (!$conn) {
               <h6 class="mt-3">DOB <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="date" id="DOB" name="DOB" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="text" id="datepicker" name="DOB" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
@@ -732,11 +736,10 @@ if (!$conn) {
               <h6 class="mt-3">Joining Date<font color="ff0000">*</font></h6>
             </label>
 			  
-		<div class="input-group input-daterange">
-          <input type="date" id="JOINING_DATE" name="JOINING_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
-          <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
+		<!-- <div class="input-group input-daterange"> -->
+          <input type="text" id="datepicker2" name="JOINING_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+          
+                    <!-- </div> -->
                    </div>
                   
                    <button type="submit"  class="btn btn-primary mt-3">Submit</button>
@@ -1626,5 +1629,27 @@ if (!$conn) {
         $('#example').DataTable();
     });
     </script>
+
+    <!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      $("#datepicker2").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
+
   </body>
 </html>
