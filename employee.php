@@ -1,7 +1,7 @@
 <?php
 session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
 
-$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
@@ -673,7 +673,7 @@ if (!$conn) {
         <tbody>
 
                    <?php
-                                $sql = "select *from EMPLOYEE";
+                                $sql = "select * from EMPLOYEE";
                                 $stid = oci_parse($conn, $sql);
                                 $r = oci_execute($stid);
                                 while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
@@ -700,6 +700,13 @@ if (!$conn) {
       
         </tbody>
     </table>
+
+    <div class="d-flex flex-row bd-highlight mt-3 mb-3 justify-content-around">
+      <a href="look_after_list.php"> <button type="button" class="btn btn-primary ">  Assign to a cage</button> </a>
+      <a href="google.com"> <button type="button" class="btn btn-dark ">  Assign to an animal</button> </a>
+      <a href="google.com"> <button type="button" class="btn btn-success ">  Assign to a cage</button> </a>
+      
+    </div>
 
   
    </div>
