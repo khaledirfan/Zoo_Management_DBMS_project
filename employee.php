@@ -664,7 +664,10 @@ if (!$conn) {
                 <th>EMPLOYEE_NAME</th>
                 <th>GENDER</th>
                 <th>DOB</th>
-                <th>JOB_TYPE</th>
+                <!--  -->
+                <th>AGE</th>  
+                        <!--  -->
+                <th>JOB_TYPE</th>   
                 <th>DESIGNATION</th>
                 <th>SALARY</th>
                 <th>JOINING_DATE</th>
@@ -678,13 +681,27 @@ if (!$conn) {
                                 $r = oci_execute($stid);
                                 while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
                                 {
-                
+                                  // Age calculate
+                                  $dateOfBirth = $row['DOB'];
+                                                                                       
+                                            $sql1 = 'BEGIN :khaled :=E_AGE(:Enan); END;';
+                                            $stid1 = oci_parse($conn, $sql1);
+                                            oci_bind_by_name($stid1,':Enan',$dateOfBirth);
+                                            oci_bind_by_name($stid1,':khaled',$age);
+                                            $r1 = oci_execute($stid1);
+
+                                                // age calculate
                                 echo "
                                 <tr>
                                 <td>" . $row["EMPLOYEE_ID"] . "</td>
                                 <td>" . $row["EMPLOYEE_NAME"] . "</td>
                                 <td>" . $row["GENDER"] . "</td>
                                 <td>" . $row["DOB"] . "</td>
+                                <td>" . $age . "</td>   
+                                
+
+
+
                                 <td>" . $row["JOB_TYPE"] . "</td>
                                 <td>" . $row["DESIGNATION"] . "</td>
                                 <td>" . $row["SALARY"] . "</td>

@@ -18,6 +18,7 @@ if (!$conn) {
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
+    
   }
 }
 ?>
