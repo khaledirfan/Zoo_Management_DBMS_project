@@ -15,12 +15,49 @@ if (!$conn) {
       $sql = "insert into RESEARCH (R_PAPERLINK, R_TOPIC, R_NAME, R_MAIL,R_INSTITUTION,R_PHONENO) values ('$R_PAPERLINK',' $R_TOPIC','$R_NAME','$R_MAIL','$R_INSTITUTION','$R_PHONENO')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
+      $trig="
+CREATE OR REPLACE TRIGGER R_Trigger
+AFTER INSERT OR UPDATE
+--OF Paperlink
+ON Research
+FOR EACH ROW
+ 
+ 
+BEGIN
+ 
+	dbms_output.put_line('Thanks for submitting you research work');
+
+ 
+END;
+";
+$stid1=oci_parse($conn,$trig);
+$r=oci_execute($stid1);
+if(isset($_POST['submit']))
+{
+   if($stid1)
+    {
+    echo '<script>alert("Thanks for submitting your research work.")</script>';
     }
+    else{
+      echo '<script>alert("Sorry.")</script>';
+     
+  }
+}
+    }
+    else{
+      echo '<script>alert("Sorry.")</script>';
+    }
+
+  }
+  else{
+    echo '<script>alert("Sorry.")</script>';
   }
 }
 ?>
+<!-- trigger implimentation -->
 
-
+ 
+<!-- trigger end -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -712,7 +749,7 @@ if (!$conn) {
                     </div>
                    </div>
                   
-                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
+                   <button type="submit"  class="btn btn-primary mt-3" name="submit">Submit</button>
 
                 </form>
             </div>
