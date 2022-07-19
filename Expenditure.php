@@ -696,6 +696,89 @@ if (!$conn) {
   
    </div>
 
+   <div class="text-center pb-5">
+                            <form method="post">
+                                <input class="col-md-4" type="text" name="search1" placeholder="Search by Date">
+                                <input class="" type="submit" name="submit">
+                               
+                            </form>
+
+                           
+
+                            <form method="post">
+                                <input class="col-md-4 " type="text" name="search2" placeholder="Search by Expenditure type">
+                                <input class="" type="submit" name="submit2">
+                           
+                            </form>
+
+
+
+      </div>
+
+
+    <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Expenditure</th>
+                                    
+                                    <th>Date</th> 
+                                    
+                                    <th>Expenditure type</th>
+                                    <th>Amount</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($_POST["submit"])) {
+
+                                    $name = $_POST["search1"];
+                                    $result = " SELECT SUM(EXP_AMOUNT)
+                                                FROM EXPENDITURE 
+                                                WHERE EXP_DATE =' $name ' ";
+
+                                    $stidd = oci_parse($conn, $result);
+                                    $rr = oci_execute($stidd);
+                                    $row = oci_fetch_array($stidd, OCI_ASSOC + OCI_RETURN_NULLS);
+                                        echo "<tr>
+
+                                   
+                                        <td>Total Expenditure</td>
+                                        <td>" . $name . "</td>
+                                        <td></td>
+                                        <td>" . $row['SUM(EXP_AMOUNT)'] . "</td>
+                                        
+                                    </tr>";
+                                    
+
+                                    
+                                } elseif (isset($_POST["submit2"])) {
+                                    $name = $_POST["search2"];
+                                    $result = " SELECT SUM(EXP_AMOUNT)
+                                                FROM EXPENDITURE 
+                                                WHERE EXP_TYPE = ' $name ' ";
+
+                                    $stidd = oci_parse($conn, $result);
+                                    $rr = oci_execute($stidd);
+                                    $row = oci_fetch_array($stidd, OCI_ASSOC + OCI_RETURN_NULLS);
+                                        
+
+                                        echo "<tr>
+                                        <td>Total Expenditure</td>
+                                        <td></td>
+                                        <td>" . $name . "</td>
+                                        <td>" . $row['SUM(EXP_AMOUNT)'] . "</td>
+                                        
+                                    </tr>";
+                                    
+
+                                    
+                                } 
+                                ?>
+                            </tbody>
+                        </table>
+
 
 
 

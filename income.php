@@ -1,7 +1,7 @@
 <?php
 session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
 
-$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
@@ -662,7 +662,7 @@ if (!$conn) {
                 <!-- <th>SI No</th> -->
                 <th>Income ID</th>
                 <th>Income Source</th>
-                <th>Income Type</th>
+              
                 <th>Income date</th>
                 <th>Amount</th>
             </tr>
@@ -680,7 +680,7 @@ if (!$conn) {
                                 <tr>
                                 <td>" . $row["TAX_INCOME_ID"] . "</td>
                                 <td>" . $row["SOURCE"] . "</td>
-                                <td>" . $row["INCOME_TYPE"] . "</td>
+                             
                                 <td>" . $row["INCOME_DATE"] . "</td>
                                 <td>" . $row["AMOUNT"] . "</td>
                                 </tr>
@@ -697,6 +697,89 @@ if (!$conn) {
 
   
    </div>
+
+
+   <div class="text-center pb-5">
+                            <form method="post">
+                                <input class="col-md-4" type="text" name="search1" placeholder="Search by Date">
+                                <input class="" type="submit" name="submit">
+                               
+                            </form>
+
+                           
+
+                            <form method="post">
+                                <input class="col-md-4 " type="text" name="search2" placeholder="Search by source">
+                                <input class="" type="submit" name="submit2">
+                           
+                            </form>
+
+
+
+      </div>
+
+      <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Income</th>
+                                    
+                                    <th>Date</th> 
+                                    
+                                    <th>Source</th>
+                                    <th>Amount</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($_POST["submit"])) {
+
+                                    $name = $_POST["search1"];
+                                    $result = " SELECT SUM(AMOUNT)
+                                                FROM income 
+                                                WHERE INCOME_DATE =' $name ' ";
+
+                                    $stidd = oci_parse($conn, $result);
+                                    $rr = oci_execute($stidd);
+                                    $row = oci_fetch_array($stidd, OCI_ASSOC + OCI_RETURN_NULLS);
+                                        echo "<tr>
+
+                                   
+                                        <td>Total Income</td>
+                                        <td>" . $name . "</td>
+                                        <td></td>
+                                        <td>" . $row['SUM(AMOUNT)'] . "</td>
+                                        
+                                    </tr>";
+                                    
+
+                                    
+                                } elseif (isset($_POST["submit2"])) {
+                                    $name = $_POST["search2"];
+                                    $result = " SELECT SUM(AMOUNT)
+                                                FROM income 
+                                                WHERE SOURCE = '$name' ";
+
+                                    $stidd = oci_parse($conn, $result);
+                                    $rr = oci_execute($stidd);
+                                    $row = oci_fetch_array($stidd, OCI_ASSOC + OCI_RETURN_NULLS);
+                                    
+
+                                        echo "<tr>
+                                        <td>Total Income</td>
+                                        <td></td>
+                                        <td>" . $name . "</td>
+                                        <td>" . $row['SUM(AMOUNT)'] . "</td>
+                                        
+                                    </tr>";
+                                    
+
+                                    
+                                } 
+                                ?>
+                            </tbody>
+                        </table>
 
 
 

@@ -1,17 +1,17 @@
 <?php
-  $conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['TAX_INCOME_ID'])) {
-      $TAX_INCOME_ID = $_POST['TAX_INCOME_ID'];
+    if(isset($_POST['SOURCE'])) {
+      // $TAX_INCOME_ID = $_POST['TAX_INCOME_ID'];
       $SOURCE = $_POST['SOURCE'];
-      $INCOME_TYPE = $_POST['INCOME_TYPE'];
+      // $INCOME_TYPE = $_POST['INCOME_TYPE'];
       $INCOME_DATE = $_POST['INCOME_DATE'];
       $AMOUNT = $_POST['AMOUNT'];
-      $sql = "insert into INCOME (TAX_INCOME_ID,SOURCE,INCOME_TYPE,INCOME_DATE,AMOUNT) values ('$TAX_INCOME_ID','$SOURCE','$INCOME_TYPE','$INCOME_DATE','$AMOUNT')";
+      $sql = "insert into INCOME (TAX_INCOME_ID,SOURCE,INCOME_DATE,AMOUNT) values (concat('TI_x00',income_ID_SEQ.NEXTVAL),'$SOURCE',to_date('$INCOME_DATE','mm-dd-yyyy'),'$AMOUNT')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -46,6 +46,11 @@ if (!$conn) {
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
 
 
     <!-- web-font loader-->
@@ -648,24 +653,22 @@ if (!$conn) {
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="TAX_INCOME_ID" class="form-label">
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="TAX_INCOME_ID" class="form-label">
               <h6 class="mt-3">TAX INCOME ID <font color="ff0000">*</font></h6>
             </label>
 			  
           <input type="text" id="TAX_INCOME_ID" name="TAX_INCOME_ID" placeholder="Enter TAX_INCOME_ID" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
+                    </div> -->
                    </div>
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_TYPE" class="form-label">
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_TYPE" class="form-label">
               <h6 class="mt-3">INCOME TYPE<font color="ff0000">*</font></h6>
             </label>
 			  
           <input type="text" id="INCOME_TYPE" name="INCOME_TYPE" placeholder="Enter INCOME TYPE" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
+                    </div> -->
                    </div>
 
                    <div class="row justify-content-between text-left">
@@ -679,15 +682,24 @@ if (!$conn) {
                    </div>
 
 
-                        <div class="row justify-content-between text-left">
+                        <!-- <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_DATE" class="form-label">
               <h6 class="mt-3">INCOME DATE <font color="ff0000">*</font></h6>
             </label>
 			  
           <input type="date" id="INCOME_DATE" name="INCOME_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
-                   </div>
+                   </div> -->
+
+                   <div class="form-group col-sm-12 flex-column d-flex">  <label for="INCOME_DATE" class="form-label">
+                <h6 class="mt-3">INCOME_DATE<font color="ff0000">*</font></h6>
+              </label>
+          
+      <!-- <div class="input-group input-daterange"> -->
+            <input type="text" id="datepicker" name="INCOME_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+            
+                      <!-- </div> -->
+                    </div>
 
 
                    <div class="row justify-content-between text-left">
@@ -1589,5 +1601,18 @@ if (!$conn) {
         $('#example').DataTable();
     });
     </script>
+
+    <!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
   </body>
 </html>

@@ -1,22 +1,3 @@
-<?php
-  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
-  or die(oci_error());
-if (!$conn) {
-  echo "sorry";
-} else {
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['EXP_TYPE'])) {
-      // $TRX_EXP_ID= $_POST['TRX_EXP_ID'];
-      $EXP_TYPE = $_POST['EXP_TYPE'];
-      $EXP_DATE = $_POST['EXP_DATE'];
-      $EXP_AMOUNT = $_POST['EXP_AMOUNT'];
-      $sql = "insert into EXPENDITURE (TRX_EXP_ID, EXP_TYPE, EXP_DATE, EXP_AMOUNT) values (concat('Ex_00',Expenditure_ID_SEQ.NEXTVAL),' $EXP_TYPE',to_date('$EXP_DATE','mm-dd-yyyy'),'$EXP_AMOUNT')";
-      $stid = oci_parse($conn, $sql);
-      $r = oci_execute($stid);
-    }
-  }
-}
-?>
 
 
 
@@ -28,7 +9,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>expenditure_form</title>
+    <title>Admin Finance</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -44,12 +25,17 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="food_form.css">
+    <!--  -->
+    
+
 
     <!-- billu bhai er code -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-
+    <!-- admin finance style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="admin_finance.css">
+   
 
     <!-- web-font loader-->
     <script>
@@ -639,79 +625,94 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-      <div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-           
-            <div class="card mb-3">
-                <h5 class="text-center mb-4">Add Expenditure Info</h5>
-                <form class="form-card" action="Expenditure_form.php" method="post">
+      <div class="col-md-10 mt-5 pt-5 ">
+        <div class="row ">
+
+                
+                <div class="col-xl-3 col-lg-4">
+                    <div class="card l-bg-cherry">
+
+                        <a href="Expenditure.php">
+                        <div class="card-statistic-3 p-4 ">
+                            <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0 " >Expenditure</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0">
+                                        Total Expenditure
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span><i class="fa fa-arrow-up"></i></span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                        </a>
 
 
-
-
-                    <div class="row justify-content-between text-left">
-                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="TRX_EXP_ID" class="form-label">
-              <h6 class="mt-3">Expenditure ID <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="TRX_EXP_ID" name="TRX_EXP_ID" placeholder="Enter Expenditure ID" class="form-control text-left mr-2">         
-                    </div> -->
-                   </div>
-
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXP_TYPE" class="form-label">
-              <h6 class="mt-3">Expenditure TYPE<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="EXP_TYPE" name="EXP_TYPE" placeholder="Enter type" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
-                   </div>
+                </div>
+                
+                <div class="col-xl-3 col-lg-4">
+                    <div class="card l-bg-green-dark">
 
-                        <div class="row justify-content-between text-left">
-                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXP_DATE" class="form-label">
-              <h6 class="mt-3">Expenditure Date <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="date" id="EXP_DATE" name="EXP_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
-                    </div> -->
+                        <a href="Income.php">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Income</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0">
+                                        Total Income
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span><i class="fa fa-arrow-up"></i></span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </a>
 
-                      <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXP_DATE" class="form-label">
-                <h6 class="mt-3">Expenditure Date<font color="ff0000">*</font></h6>
-              </label>
-          
-      <!-- <div class="input-group input-daterange"> -->
-            <input type="text" id="datepicker" name="EXP_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
-            
-                      <!-- </div> -->
+
                     </div>
-
-
-                    
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXP_AMOUNT" class="form-label">
-              <h6 class="mt-3">Expenditure Amount<font color="ff0000">*</font></h6>
-            </label>
-			  
-		<div class="input-group input-daterange">
-          <input type="text" id="EXP_AMOUNT" name="EXP_AMOUNT" placeholder="Enter amount" class="form-control text-left mr-2">         
-          <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="card l-bg-orange-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Revenue</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0">
+                                        Total Revenue
+                                    </h2>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <span> <i class="fa fa-arrow-up"></i></span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
                     </div>
-                   </div>
-                  
-                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
-
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+         </div>
+
+         
 
 
 
