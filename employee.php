@@ -1,11 +1,17 @@
 <?php
 session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
 
-$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
+  if(isset($_GET['EMPLOYEE_ID'])){
+    $EMPLOYEE_ID= $_GET['EMPLOYEE_ID'];
+    $sql="DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID='$EMPLOYEE_ID' ";
+    $stid=oci_parse($conn, $sql);
+    $r= oci_execute($stid);
+ }
 }
 
 ?>
@@ -671,6 +677,7 @@ if (!$conn) {
                 <th>DESIGNATION</th>
                 <th>SALARY</th>
                 <th>JOINING_DATE</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -706,6 +713,7 @@ if (!$conn) {
                                 <td>" . $row["DESIGNATION"] . "</td>
                                 <td>" . $row["SALARY"] . "</td>
                                 <td>" . $row["JOINING_DATE"] . "</td>
+                                <td>  <a href='employee.php?EMPLOYEE_ID=".$row["EMPLOYEE_ID"]."'><button type='button' class='btn btn-light btn-lg float-end'>Delete</button></a> </td>
                                 </tr>
                                 ";
                                 }
