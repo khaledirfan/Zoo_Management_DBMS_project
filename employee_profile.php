@@ -6,12 +6,11 @@ $conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
 if (!$conn) {
   echo "sorry";
 } else {
-  if(isset($_GET['EMPLOYEE_ID'])){
-    $EMPLOYEE_ID= $_GET['EMPLOYEE_ID'];
-    $sql="DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID='$EMPLOYEE_ID' ";
-    $stid=oci_parse($conn, $sql);
-    $r= oci_execute($stid);
- }
+    $emp= $_GET['un'];
+    $sql= "select * from EMPLOYEE where EMPLOYEE_NAME='$emp'";
+    $stid = oci_parse($conn, $sql);
+    $r = oci_execute($stid);
+    $EMPLOYEEjoinMember = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS);
 }
 
 ?>
@@ -24,7 +23,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Employee</title>
+    <title>food</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -643,108 +642,135 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
+      <div> 
 
-       <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
-  
-              <div class="container pt-5 pb-5">
-        <div class="card">
-          <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Employee Info:</h1>
-            <a href="employee_form.php"
-              ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Employees
-              </button></a
-            >
-          </div>
-        </div>
       </div>
-                  
+      <div></div>
+<div class="container">
+    <div class="main-body" >
+    
+          <!-- Breadcrumb -->
+          
+          <!-- /Breadcrumb -->
+          <div style="margin: 100px;"></div>
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center" style="margin-top: 40px; margin-bottom: 40px">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>John Doe</h4>
+                      <!--<p class="text-secondary mb-1"></p>designation
+                      <p class="text-muted font-size-sm"></p>
+                      <button class="btn btn-primary"></button>
+                      <button class="btn btn-outline-primary"></button>
+                    -->
+                    </div>
+                  </div>
                 </div>
+              </div>
+              
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0"> <b>Full Name</b> </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        <?php
+                              echo $EMPLOYEEjoinMember["EMPLOYEE_NAME"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Gender</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["GENDER"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Job_Type</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["JOB_TYPE"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Dsignation</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["DESIGNATION"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Salary</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["SALARY"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Joining Date</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["JOINING_DATE"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">DOB</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    <?php
+                              echo $EMPLOYEEjoinMember["DOB"];
+                            ?>
+                    </div>
+                  </div>
+                  <hr>
+                  
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-info " href="">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-       <div class="card-body" style="margin-top:25px">
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <!-- <th>SI No</th> -->
-                <th>EMPLOYEE_ID</th>
-                <th>EMPLOYEE_NAME</th>
-                <th>GENDER</th>
-                <th>DOB</th>
-                <!--  -->
-                <th>AGE</th>  
-                        <!--  -->
-                <th>JOB_TYPE</th>   
-                <th>DESIGNATION</th>
-                <th>SALARY</th>
-                <th>JOINING_DATE</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                   <?php
-                                $sql = "select * from EMPLOYEE";
-                                $stid = oci_parse($conn, $sql);
-                                $r = oci_execute($stid);
-                                while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
-                                {
-                                  // Age calculate
-                                  $dateOfBirth = $row['DOB'];
-                                                                                       
-                                            $sql1 = 'BEGIN :khaled :=E_AGE(:Enan); END;';
-                                            $stid1 = oci_parse($conn, $sql1);
-                                            oci_bind_by_name($stid1,':Enan',$dateOfBirth);
-                                            oci_bind_by_name($stid1,':khaled',$age);
-                                            $r1 = oci_execute($stid1);
-
-                                                // age calculate
-                                $un= $row["EMPLOYEE_NAME"];
-                                echo "
-                                <tr>
-                                <td>" . $row["EMPLOYEE_ID"] . "</td>
-                                <td>";
-                if ($_GET == NULL || ($_GET != NULL && $_GET['un'] == 'a')) {
-                  echo "<a href='employee_profile.php?un=" . $row['EMPLOYEE_NAME'] . "'>";
-                }
-                echo  $row["EMPLOYEE_NAME"];
-                if ($_GET == NULL || ($_GET != NULL && $_GET['un'] == 'a')) {
-                  echo "</a>";
-                }
-                echo "</td>
-                                <!--<td>" . $row["EMPLOYEE_NAME"] . "</td>-->
-                                <td>" . $row["GENDER"] . "</td>
-                                <td>" . $row["DOB"] . "</td>
-                                <td>" . $age . "</td>   
-                                
+              
 
 
 
-                                <td>" . $row["JOB_TYPE"] . "</td>
-                                <td>" . $row["DESIGNATION"] . "</td>
-                                <td>" . $row["SALARY"] . "</td>
-                                <td>" . $row["JOINING_DATE"] . "</td>
-                                <td>  <a href='employee.php?EMPLOYEE_ID=".$row["EMPLOYEE_ID"]."'><button type='button' class='btn btn-light btn-lg float-end'>Delete</button></a> </td>
-                                </tr>
-                                ";
-                                }
+            </div>
+          </div>
 
-
-              ?>
-
-           
-      
-        </tbody>
-    </table>
-
-    <div class="d-flex flex-row bd-highlight mt-3 mb-3 justify-content-around">
-      <a href="look_after_list.php"> <button type="button" class="btn btn-primary ">  Assign to a cage</button> </a>
-      <a href="google.com"> <button type="button" class="btn btn-dark ">  Assign to an animal</button> </a>
-      <a href="google.com"> <button type="button" class="btn btn-success ">  Assign to a cage</button> </a>
-      
+        </div>
     </div>
-
-  
-   </div>
 
 
 
