@@ -1,7 +1,7 @@
 <?php
 session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
 
-$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
@@ -677,6 +677,9 @@ if (!$conn) {
                 <th>DESIGNATION</th>
                 <th>SALARY</th>
                 <th>JOINING_DATE</th>
+                <!--  -->
+                <th>Job Duration</th>
+                <!--  -->
                 <th>Action</th>
             </tr>
         </thead>
@@ -698,6 +701,17 @@ if (!$conn) {
                                             $r1 = oci_execute($stid1);
 
                                                 // age calculate
+
+                                  // Job duration Calculate
+                                  $JOINING_DATE = $row['JOINING_DATE'];
+                                                                                       
+                                            $sql2 = 'BEGIN :khaled :=E_AGE(:Enan); END;';
+                                            $stid2 = oci_parse($conn, $sql2);
+                                            oci_bind_by_name($stid2,':Enan',$JOINING_DATE);
+                                            oci_bind_by_name($stid2,':khaled',$Job_Duration);
+                                            $r2 = oci_execute($stid2);
+
+                                  // Job duration Calculate
                                 echo "
                                 <tr>
                                 <td>" . $row["EMPLOYEE_ID"] . "</td>
@@ -705,6 +719,7 @@ if (!$conn) {
                                 <td>" . $row["GENDER"] . "</td>
                                 <td>" . $row["DOB"] . "</td>
                                 <td>" . $age . "</td>   
+                                 
                                 
 
 
@@ -713,6 +728,8 @@ if (!$conn) {
                                 <td>" . $row["DESIGNATION"] . "</td>
                                 <td>" . $row["SALARY"] . "</td>
                                 <td>" . $row["JOINING_DATE"] . "</td>
+                                <td>" . $Job_Duration . "</td>  
+                                
                                 <td>  <a href='employee.php?EMPLOYEE_ID=".$row["EMPLOYEE_ID"]."'><button type='button' class='btn btn-light btn-lg float-end'>Delete</button></a> </td>
                                 </tr>
                                 ";

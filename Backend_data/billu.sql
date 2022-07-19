@@ -13,3 +13,5 @@ END;
 
 
 
+---- Job duration function
+
