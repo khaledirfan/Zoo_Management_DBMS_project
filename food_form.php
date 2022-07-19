@@ -1,5 +1,5 @@
 <?php
-  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+  $conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
@@ -10,7 +10,7 @@ if (!$conn) {
       $QUANTITY = $_POST['QUANTITY'];
       $FOODTYPE = $_POST['FOODTYPE'];
       $EXPIRATIONDATE = $_POST['EXPIRATIONDATE'];
-      $sql = "insert into food (FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values ('$FOODNAME',' $QUANTITY','$FOODTYPE',to_date('$EXPIRATIONDATE','mm-dd-yyyy'))";
+      $sql = "insert into food (FOOD_ID,FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values (FOOD_FOOD_ID_SQ.nextval,'$FOODNAME',' $QUANTITY','$FOODTYPE',to_date('$EXPIRATIONDATE','mm-dd-yyyy'))";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -32,7 +32,7 @@ if (!$conn) {
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
+    <link rel="icon" type="image/x-icon" href="/img/zoo.ico">
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -398,7 +398,7 @@ if (!$conn) {
         <div class="header__top">
           <div class="row align-items-center">
             <div class="col-6 col-lg-4">
-              <a class="logo" href="index.html"
+              <a class="logo" href="index.php"
                 ><img
                   class="logo__img col-lg-12"
                   src="img/logo/org5.png"

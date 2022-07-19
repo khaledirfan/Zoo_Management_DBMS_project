@@ -1,3 +1,16 @@
+<?php
+session_start();
+$uname = $_SESSION['uname'];
+$conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
+  or die(oci_error());
+
+if (!$conn) {
+  echo "not connected";
+} else {
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,10 +19,11 @@
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Bangladesh National Zoo</title>
+    <title>user</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+     <link rel="icon" type="image/x-icon" href="/img/zoo.ico">
     <!-- web-font loader-->
     <script>
       WebFontConfig = {
@@ -353,19 +367,19 @@
         <div class="header__top">
           <div class="row align-items-center">
             <div class="col-6 col-lg-4">
-              <a class="logo" href="index.html"
+              <a class="logo" href="user.php"
                 ><img
                   class="logo__img col-lg-12"
-                  src="img/logoedit_ .png"
+                  src="img/zoo.svg"
                   alt="logo"
-                  style="height: 100px; width: 100px"
+                  style="height: 80px; width: 100px"
               /></a>
             </div>
             <div class="col-6 col-lg-8 d-flex justify-content-end">
               <!-- main menu start-->
               <ul class="main-menu">
                 <li class="main-menu__item main-menu__item--active">
-                  <a class="main-menu__link" href="javascript:void(0);"
+                  <a class="main-menu__link" href="user.php"
                     ><span>Home</span></a
                   >
                   <!-- sub menu start-->
@@ -393,8 +407,8 @@
                   </ul>
                   <!-- sub menu end-->
                 </li>
-                <li class="main-menu__item main-menu__item--has-child">
-                  <a class="main-menu__link" href="javascript:void(0);"
+                <li class="main-menu__item">
+                  <a class="main-menu__link" href="user.php"
                     ><span>Animals</span></a
                   >
                   <!-- sub menu start-->
@@ -475,14 +489,14 @@
                   <!-- sub menu end-->
                 </li>
                 <li class="main-menu__item">
-                  <a class="main-menu__link" href="services.html"
-                    ><span>Services</span></a
+                  <a class="main-menu__link" href="research_form.php"
+                    ><span>Research</span></a
                   >
                 </li>
 
                 <li class="main-menu__item">
-                  <a class="main-menu__link" href="javascript:void(0);"
-                    ><span>Finances</span></a
+                  <a class="main-menu__link" href="complaint_form.php"
+                    ><span>Complain</span></a
                   >
                   <!-- sub menu start-->
                   <ul class="main-menu__sub-list">
@@ -510,8 +524,16 @@
                 <li class="main-menu__item">
                   <a
                     class="main-menu__link"
-                    href="/complaint/ContactFrom_v1/index.html"
-                    ><span>Complain</span></a
+                    href="#"
+                    ><span>Donate</span></a
+                  >
+                </li>
+
+                <li class="main-menu__item">
+                  <a
+                    class="main-menu__link"
+                    href="user.php"
+                    ><?php echo $uname ?></span></a
                   >
                 </li>
                 <!-- <li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Elements</span></a> -->
@@ -537,8 +559,8 @@
               </ul>
               <!-- main menu end--><a
                 class="header__button"
-                href="/login/img/login-form-05/index.html"
-                >Log In</a
+                href="logout.php"
+                >Log out</a
               >
               <!-- menu-trigger start-->
               <div class="hamburger">
@@ -1461,7 +1483,7 @@
     <!-- scripts-->
     <script src="js/common.js"></script>
     <div style="display: none">
-      <?xml version="1.0" encoding="utf-8"?><svg
+      <xml version="1.0" encoding="utf-8"?><svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
