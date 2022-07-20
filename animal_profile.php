@@ -1,32 +1,19 @@
 <?php
-  $conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
+session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
+$unome=$_GET['un'];
+$conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['GENUS'])) {
-   
-      
-      $GENUS = $_POST['GENUS'];
-      $SPECIES = $_POST['SPECIES'];
-      $KINGDOM = $_POST['KINGDOM'];
-      $PHYLUM = $_POST['PHYLUM'];
-      $T_CLASS = $_POST['T_CLASS'];
-      $FAMILY = $_POST['FAMILY'];
-      $T_ORDER = $_POST['T_ORDER'];
-      
+  $sql = "select * from animal where animal_id='$unome'";
+    $stid = oci_parse($conn, $sql);
+    $r = oci_execute($stid);
 
-      
-      $sql = "insert into taxonomy (GENUS,SPECIES,KINGDOM,PHYLUM,T_CLASS,FAMILY,T_ORDER) values ('$GENUS','$SPECIES','$KINGDOM','$PHYLUM','$T_CLASS','$FAMILY','$T_ORDER')";
-      $stid = oci_parse($conn, $sql);
-      $r = oci_execute($stid);
-    }
-  }
+    $raw = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS);
 }
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,11 +23,24 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>taxonomy_form</title>
+    <title>animal</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
+    <link rel="stylesheet" href="animal_profile.css" />
+    <!-- favicon icon added  -->
+     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
+
+     <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -52,7 +52,6 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="food_form.css">
 
 
     <!-- web-font loader-->
@@ -643,123 +642,231 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-      <div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-           
-            <div class="card mb-3">
-                <h5 class="text-center mb-4">Insert Taxonomic Info</h5>
-                <form class="form-card" action="taxonomy_form.php" method="post">
+
+ 
+      
 
 
+      <main id="main" style="margin-top: 80px;">
 
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
 
-                    <!-- <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
-              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
-                       
+            <!-- ============================================================== -->
+            <!-- pageheader  -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header">
+                        <h2 class="pageheader-title" style="text-align: center;"><?php echo $unome . "'s PROFILE" ?></h2>
+                        <div>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="animal.php" class="breadcrumb-link">Animal list</a></li>
+                                        <!-- <li class="breadcrumb-item"><a href="dealer_info.php" class="breadcrumb-link">Dealer's Information</a></li> -->
+                                        <li class="breadcrumb-item active" aria-current="page"><?php echo $unome . "'s profile" ?></li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-                   </div> -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end pageheader  -->
+            <!-- ============================================================== -->
 
 
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENUS" class="form-label">
-              <h6 class="mt-3">GENUS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="GENUS" name="GENUS" placeholder="GENUS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+
+            <!-- ============================================================== -->
+            <!-- Admin profile -->
+            <!-- ============================================================== -->
+
+            <section class="admin_p about-section gray-bg" id="about">
+                <div class="container">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-lg-6">
+                            <div class="about-text go-to">
+                                <h3 class="dark-color">About <?php echo $unome ?></h3>
+                                <h6 class="theme-color lead">Animal profile</h6>
+                                <!-- <p>
+                                    dealer Id <?php// echo $unome ?>, <mark><?php //echo $raw["APPLICANT_NAME"] ?></mark> ,
+                                    deals products in <mark><?php //echo "Area code " . $raw["AREA_CODE"] ?></mark>
+                                    of <?php// echo $raw["ORGANIZATION_NAME"] ?> and his area is
+                                    <?php// echo $raw["UPAZILLA"] . " under " . $raw["DISTRICT"] . " district. " ?>
+                                </p> -->
+                                <div class="row about-list">
+                                    <div class="col-md-6">
+                                        <div class="media">
+                                            <label>NAME</label>
+                                            <p> <?php echo $raw['ANIMAL_NAME'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>AGE</label>
+                                            <p><?php echo $raw['AGE'] ?></p>
+
+                                        </div>
+                                        <!-- <div class="media">
+                                            <label>Chember</label>
+                                            <p></p>
+                                        </div> -->
+                                        <div class="media">
+                                            <label>CURRENT CONDITION</label>
+                                            <p><?php echo $raw['CURRENT_CONDITION'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="media">
+                                            <label>CATEGORY</label>
+                                            <p><?php echo $raw['CATEGORY'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>ARRIVAL PLACE</label>
+                                            <p><?php echo $raw['ARRIVAL_PLACE'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>ARRIVAL DATE</label>
+                                            <p><?php echo $raw['ARRIVAL_DATE'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>BREEDING STATUS</label>
+                                            <p><?php echo $raw['BREEDING_STATUS'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="media">
+                                            <label>ENDANGERED STATUS</label>
+                                            <p><?php echo $raw['ENDANGERED_STATUS'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>ENVIRONMENT</label>
+                                            <p><?php echo $raw['ENVIRONMENT'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>PREVIOUS_AFFECTED_DISEASES</label>
+                                            <p><?php echo $raw['PREVIOUS_AFFECTED_DISEASES'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>LIFESPAN</label>
+                                            <p><?php echo $raw['LIFESPAN'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>SPECIAL_DIMENSION</label>
+                                            <p><?php echo $raw['SPECIAL_DIMENSION'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>HEIGHT</label>
+                                            <p><?php echo $raw['A_HEIGHT'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>WEIGHT</label>
+                                            <p><?php echo $raw['A_WEIGHT'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>DEATH</label>
+                                            <p><?php echo $raw['DEATH'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>CAUSE</label>
+                                            <p><?php echo $raw['CAUSE'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>PRICE</label>
+                                            <p><?php echo $raw['PRICE'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>CAGE_NO</label>
+                                            <p><?php echo $raw['CAGE_NO'] ?></p>
+                                        </div>
+                                        <div class="media">
+                                            <label>SPECIES</label>
+                                            <p><?php echo $raw['SPECIES'] ?></p>
+                                        </div>
+
+                                        <!-- <div class="media">
+                                            <label>Freelance</label>
+                                            <p>Available</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="about-avatar">
+                                <img src="img/gallery_2.jpg" title="" alt="">
+                            </div>
+                        </div>
                     </div>
-                   </div>
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIES" class="form-label">
-              <h6 class="mt-3">SPECIES <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="SPECIES" name="SPECIES" placeholder="SPECIES" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    <div class="counter">
+                        <div class="row">
+                            <!-- <div class="col-6 col-lg-3">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2" data-to="500" data-speed="500">500</h6>
+                                    <p class="m-0px font-w-600">Total Dealers</p>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-6 col-lg-6">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2" data-to="150" data-speed="150">150</h6>
+                                    <p class="m-0px font-w-600">Customres under me</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-6">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2" data-to="850" data-speed="850">850</h6>
+                                    <p class="m-0px font-w-600">Availabe Packages</p>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-6 col-lg-3">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2" data-to="190" data-speed="190">190</h6>
+                                    <p class="m-0px font-w-600">Total feedback</p>
+                                </div>
+                            </div> -->
+                        </div>
                     </div>
-                   </div>
-
-                   
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="KINGDOM" class="form-label">
-              <h6 class="mt-3">KINGDOM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="KINGDOM" name="KINGDOM" placeholder="KINGDOM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    <div class="counter">
+                        <div class="row">
+                            <div class="col-6 col-lg-4">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2"><a href="look_after_list.php" style="color:#38CE24 ;"><?php echo $unome ?>'s CAGE</a></h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-4">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2"><a href="dealer_customer2.php" style="color:#38CE24 ;"><?php echo $unome ?>'s Customers</a></h6>
+                                </div>
+                            </div>
+                            <!-- <div class="col-6 col-lg-3">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2"><a href="package_info.php" style="color:#38CE24 ;">Package Info</a></h6>
+                                </div>
+                            </div> -->
+                            <div class="col-6 col-lg-4">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2"><a href="dealer_treasury.html" style="color:#38CE24 ;"><?php echo $unome ?>'s Treasury</a></h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                   </div>
+                </div>
+            </section>
 
-
-                   
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PHYLUM" class="form-label">
-              <h6 class="mt-3">PHYLUM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="PHYLUM" name="PHYLUM" placeholder="PHYLUM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_CLASS" class="form-label">
-              <h6 class="mt-3">CLASS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_CLASS" name="T_CLASS" placeholder="T_CLASS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FAMILY" class="form-label">
-              <h6 class="mt-3">FAMILY<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FAMILY" name="FAMILY" placeholder="FAMILY" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_ORDER" class="form-label">
-              <h6 class="mt-3">ORDER<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_ORDER" name="T_ORDER" placeholder="T_ORDER" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-
-                   <div class="row justify-content-between text-left">
-                        
-                  
-                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
-
-                </form>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb"></ol>
+                </nav>
             </div>
         </div>
+        <!-- ============================================================== -->
     </div>
-</div>
 
-
-
-
-      <!-- main part end  -->
+</main><!-- End #main -->
 
 
      
@@ -1629,7 +1736,6 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();

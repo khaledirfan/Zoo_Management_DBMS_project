@@ -1,33 +1,3 @@
-<?php
-  $conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
-  or die(oci_error());
-if (!$conn) {
-  echo "sorry";
-} else {
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['GENUS'])) {
-   
-      
-      $GENUS = $_POST['GENUS'];
-      $SPECIES = $_POST['SPECIES'];
-      $KINGDOM = $_POST['KINGDOM'];
-      $PHYLUM = $_POST['PHYLUM'];
-      $T_CLASS = $_POST['T_CLASS'];
-      $FAMILY = $_POST['FAMILY'];
-      $T_ORDER = $_POST['T_ORDER'];
-      
-
-      
-      $sql = "insert into taxonomy (GENUS,SPECIES,KINGDOM,PHYLUM,T_CLASS,FAMILY,T_ORDER) values ('$GENUS','$SPECIES','$KINGDOM','$PHYLUM','$T_CLASS','$FAMILY','$T_ORDER')";
-      $stid = oci_parse($conn, $sql);
-      $r = oci_execute($stid);
-    }
-  }
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,25 +6,10 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>taxonomy_form</title>
+    <title>Bangladesh National Zoo</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
-
-     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="food_form.css">
-
-
     <!-- web-font loader-->
     <script>
       WebFontConfig = {
@@ -86,7 +41,7 @@ if (!$conn) {
   <body>
     <div class="page-wrapper">
       <!-- menu dropdown start-->
-      <!-- <div class="menu-dropdown">
+      <div class="menu-dropdown">
         <div class="menu-dropdown__inner" data-value="start">
           <div class="screen screen--start">
             <div
@@ -96,28 +51,25 @@ if (!$conn) {
               <span>VISIT</span
               ><span>
                 <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
+                  <use xlink:href="#chevron"></use></svg>
+               </span>
             </div>
             <div class="screen__item screen--trigger" data-category="pages">
               <span>THINGS TO DO</span
               ><span>
                 <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
+                  <use xlink:href="#chevron"></use></svg>
+               </span>
             </div>
             <div class="screen__item">
               <a class="screen__link" href="blog.html">LEARN AND RESEARCH</a>
             </div>
             <div class="screen__item screen--trigger" data-category="shop">
               <span>ANIMAL</span>
-              <span>
+                <span>
                 <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
+                  <use xlink:href="#chevron"></use></svg>
+               </span>
             </div>
             <div class="screen__item">
               <a class="screen__link" href="contacts.html">MUSEUM</a>
@@ -126,17 +78,15 @@ if (!$conn) {
               <span>ABOUT</span
               ><span>
                 <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
+                  <use xlink:href="#chevron"></use></svg>
+               </span>
             </div>
             <div class="screen__item screen--trigger" data-category="language">
               <span>SUPPORT US</span
               ><span>
                 <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
+                  <use xlink:href="#chevron"></use></svg>
+               </span>
             </div>
             <ul class="screen__socials">
               <li>
@@ -389,15 +339,16 @@ if (!$conn) {
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
+
 
       <!-- menu dropdown end-->
 
-      <!-- header start-->
-      <!-- header start-->
-      <!-- header start-->
-      <!-- header start-->
+
+      <!-- header start-->      <!-- header start-->      <!-- header start-->      <!-- header start-->
       <header class="header header-common">
+
+
         <!-- navigation bar start  -->
         <div class="header__top">
           <div class="row align-items-center">
@@ -405,9 +356,9 @@ if (!$conn) {
               <a class="logo" href="index.html"
                 ><img
                   class="logo__img col-lg-12"
-                  src="img/logo/org5.png"
+                  src="img/logoedit_ .png"
                   alt="logo"
-                  style="height: 80px; width:100px; padding:5px;"
+                  style="height: 100px; width: 100px"
               /></a>
             </div>
             <div class="col-6 col-lg-8 d-flex justify-content-end">
@@ -631,143 +582,47 @@ if (!$conn) {
 						</div>
 					</div>
 				</div> -->
+
       </header>
 
-      <!-- navigation bar ended  -->
-      <!-- navigation bar ended  -->
-      <!-- navigation bar ended  -->
 
-      <!-- header end-->
-      <!-- header end-->
-      <!-- header end-->
-      <!-- header end-->
 
-      <!-- main part start  -->
-      <div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-           
-            <div class="card mb-3">
-                <h5 class="text-center mb-4">Insert Taxonomic Info</h5>
-                <form class="form-card" action="taxonomy_form.php" method="post">
+      <!-- navigation bar ended  -->      <!-- navigation bar ended  -->      <!-- navigation bar ended  -->    
 
 
 
-
-                    <!-- <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
-              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
-                       
-                    </div>
-                   </div> -->
-
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENUS" class="form-label">
-              <h6 class="mt-3">GENUS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="GENUS" name="GENUS" placeholder="GENUS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIES" class="form-label">
-              <h6 class="mt-3">SPECIES <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="SPECIES" name="SPECIES" placeholder="SPECIES" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-                   
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="KINGDOM" class="form-label">
-              <h6 class="mt-3">KINGDOM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="KINGDOM" name="KINGDOM" placeholder="KINGDOM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PHYLUM" class="form-label">
-              <h6 class="mt-3">PHYLUM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="PHYLUM" name="PHYLUM" placeholder="PHYLUM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_CLASS" class="form-label">
-              <h6 class="mt-3">CLASS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_CLASS" name="T_CLASS" placeholder="T_CLASS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FAMILY" class="form-label">
-              <h6 class="mt-3">FAMILY<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FAMILY" name="FAMILY" placeholder="FAMILY" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_ORDER" class="form-label">
-              <h6 class="mt-3">ORDER<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_ORDER" name="T_ORDER" placeholder="T_ORDER" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
+      <!-- header end-->         <!-- header end-->         <!-- header end-->         <!-- header end-->        
 
 
 
-                   <div class="row justify-content-between text-left">
-                        
-                  
-                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
+      <main class="main">
+    
+    
+        <!-- section start-->
+      
+        <!-- section end-->
+      
 
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+        
+       
+       
+        <!-- section start-->
+        <!-- <section class="section no-padding-top no-padding-bottom">
+					<div class="row no-gutters">
+						<div class="col-lg-6"><a class="action-block" href="#">
+							<div class="action-block__inner"><img class="img--bg" src="img/action-block_1.jpg" alt="img"/>
+								<h3 class="action-block__title"><span>The Biggest Aquarium</span><br/> <span>in America</span></h3>
+							</div></a></div>
+						<div class="col-lg-6"><a class="action-block" href="#">
+							<div class="action-block__inner"><img class="img--bg" src="img/action-block_2.jpg" alt="img"/>
+								<h3 class="action-block__title"><span>Amazing Terrarium</span><br/> <span>in Europe</span></h3>
+							</div></a></div>
+					</div>
+				</section> -->
+        <!-- section end-->
+      </main>
 
-
-
-
-      <!-- main part end  -->
-
-
-     
-
-      <!-- footer start-->
-      <!-- footer start-->
-      <!-- footer start-->
-      <!-- footer start-->
+      <!-- footer start-->      <!-- footer start-->      <!-- footer start-->      <!-- footer start-->
 
       <footer class="footer">
         <!-- <img class="footer__bg img--bg" src="img/background__layout.png" alt="bg"/> -->
@@ -916,11 +771,7 @@ if (!$conn) {
           </div>
         </div>
       </footer>
-      <!-- footer end-->
-      <!-- footer end-->
-      <!-- footer end-->
-      <!-- footer end-->
-      <!-- footer end-->
+      <!-- footer end-->      <!-- footer end-->      <!-- footer end-->      <!-- footer end-->      <!-- footer end-->
     </div>
     <!-- libs-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -928,10 +779,10 @@ if (!$conn) {
     <!-- scripts-->
     <script src="js/common.js"></script>
     <div style="display: none">
-      <!-- <xml version="1.0" encoding="utf-8"?><svg
+      <?xml version="1.0" encoding="utf-8"?><svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-      > -->
+      >
         <symbol
           viewBox="0 0 488.147 512"
           id="adult"
@@ -1602,38 +1453,5 @@ if (!$conn) {
         </symbol>
       </svg>
     </div>
-
-    <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
-
-    <!-- PAGE PLUGINS -->
-    <!-- jQuery Mapael -->
-    <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="plugins/raphael/raphael.min.js"></script>
-    <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard2.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="food_form.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-    </script>
   </body>
 </html>
