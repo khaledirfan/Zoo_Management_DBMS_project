@@ -1,24 +1,20 @@
 <?php
-  $conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
+  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['GENUS'])) {
-   
-      
-      $GENUS = $_POST['GENUS'];
-      $SPECIES = $_POST['SPECIES'];
-      $KINGDOM = $_POST['KINGDOM'];
-      $PHYLUM = $_POST['PHYLUM'];
-      $T_CLASS = $_POST['T_CLASS'];
-      $FAMILY = $_POST['FAMILY'];
-      $T_ORDER = $_POST['T_ORDER'];
-      
-
-      
-      $sql = "insert into taxonomy (GENUS,SPECIES,KINGDOM,PHYLUM,T_CLASS,FAMILY,T_ORDER) values ('$GENUS','$SPECIES','$KINGDOM','$PHYLUM','$T_CLASS','$FAMILY','$T_ORDER')";
+    if(isset($_POST['REGISTER_ID'])) {
+      // $TRX_EXP_ID= $_POST['TRX_EXP_ID'];
+      $REGISTER_ID = $_POST['REGISTER_ID'];
+      $VISITOR_NAME = $_POST['VISITOR_NAME'];
+      $VISITOR_GENDER = $_POST['VISITOR_GENDER'];
+      $VISITOR_EMAIL = $_POST['VISITOR_EMAIL'];
+      $VISITOR_DOB = $_POST['VISITOR_DOB'];
+      $VISITOR_PASSWORD = $_POST['VISITOR_PASSWORD'];
+      $TOTAL_VISITS = $_POST['TOTAL_VISITS'];
+      $sql = "insert into VISITOR_INFO (REGISTER_ID, VISITOR_NAME, VISITOR_GENDER, VISITOR_EMAIL,VISITOR_DOB,VISITOR_PASSWORD,TOTAL_VISITS) values ('$REGISTER_ID','$VISITOR_NAME','$VISITOR_GENDER','$VISITOR_EMAIL',to_date('$VISITOR_DOB','mm-dd-yyyy'),'$VISITOR_PASSWORD','$TOTAL_VISITS')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -36,7 +32,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>taxonomy_form</title>
+    <title>Visitor_info</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -53,6 +49,10 @@ if (!$conn) {
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
 
     <!-- web-font loader-->
@@ -648,105 +648,115 @@ if (!$conn) {
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
             <div class="card mb-3">
-                <h5 class="text-center mb-4">Insert Taxonomic Info</h5>
-                <form class="form-card" action="taxonomy_form.php" method="post">
+                <h5 class="text-center mb-4">Add visitor Info</h5>
+                <form class="form-card" action="visitor_info_form.php" method="post">
 
 
-
-
-                    <!-- <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
-              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
-                       
-                    </div>
-                   </div> -->
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENUS" class="form-label">
-              <h6 class="mt-3">GENUS<font color="ff0000">*</font></h6>
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="TRX_EXP_ID" class="form-label">
+              <h6 class="mt-3">Expenditure ID <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="GENUS" name="GENUS" placeholder="GENUS" class="form-control text-left mr-2">         
+          <input type="text" id="TRX_EXP_ID" name="TRX_EXP_ID" placeholder="Enter Expenditure ID" class="form-control text-left mr-2">         
+                    </div> -->
+                   </div>
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="REGISTER_ID" class="form-label">
+              <h6 class="mt-3">REGISTER_ID<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="REGISTER_ID" name="REGISTER_ID" placeholder="Enter REGISTER_ID" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIES" class="form-label">
-              <h6 class="mt-3">SPECIES <font color="ff0000">*</font></h6>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VISITOR_NAME" class="form-label">
+              <h6 class="mt-3">VISITOR_NAME<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="SPECIES" name="SPECIES" placeholder="SPECIES" class="form-control text-left mr-2">         
+          <input type="text" id="VISITOR_NAME" name="VISITOR_NAME" placeholder="Enter VISITOR_NAME" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VISITOR_GENDER" class="form-label">
+              <h6 class="mt-3">VISITOR_GENDER<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="VISITOR_GENDER" name="VISITOR_GENDER" placeholder="Enter VISITOR_GENDER" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                                      <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VISITOR_EMAIL" class="form-label">
+              <h6 class="mt-3">VISITOR_EMAIL<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="VISITOR_EMAIL" name="VISITOR_EMAIL" placeholder="Enter VISITOR_EMAIL" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="VISITOR_PASSWORD" class="form-label">
+              <h6 class="mt-3">VISITOR_PASSWORD<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="VISITOR_PASSWORD" name="VISITOR_PASSWORD" placeholder="Enter password" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="TOTAL_VISITS" class="form-label">
+              <h6 class="mt-3">TOTAL_VISITS<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="TOTAL_VISITS" name="TOTAL_VISITS" placeholder="Enter TOTAL_VISITS" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
 
                    
 
+
+
                         <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="KINGDOM" class="form-label">
-              <h6 class="mt-3">KINGDOM <font color="ff0000">*</font></h6>
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXP_DATE" class="form-label">
+              <h6 class="mt-3">Expenditure Date <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="KINGDOM" name="KINGDOM" placeholder="KINGDOM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+          <input type="date" id="EXP_DATE" name="EXP_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+                    </div> -->
+
+                      <div class="form-group col-sm-12 flex-column d-flex">  <label for="VISITOR_DOB" class="form-label">
+                <h6 class="mt-3">VISITOR_DOB<font color="ff0000">*</font></h6>
+              </label>
+          
+      <!-- <div class="input-group input-daterange"> -->
+            <input type="text" id="datepicker" name="VISITOR_DOB" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+            
+                      <!-- </div> -->
                     </div>
+
+
+                    
                    </div>
 
 
                    
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PHYLUM" class="form-label">
-              <h6 class="mt-3">PHYLUM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="PHYLUM" name="PHYLUM" placeholder="PHYLUM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_CLASS" class="form-label">
-              <h6 class="mt-3">CLASS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_CLASS" name="T_CLASS" placeholder="T_CLASS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FAMILY" class="form-label">
-              <h6 class="mt-3">FAMILY<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FAMILY" name="FAMILY" placeholder="FAMILY" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_ORDER" class="form-label">
-              <h6 class="mt-3">ORDER<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_ORDER" name="T_ORDER" placeholder="T_ORDER" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-
-                   <div class="row justify-content-between text-left">
-                        
                   
                    <button type="submit"  class="btn btn-primary mt-3">Submit</button>
 
@@ -1635,5 +1645,19 @@ if (!$conn) {
         $('#example').DataTable();
     });
     </script>
+
+
+    <!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
   </body>
 </html>

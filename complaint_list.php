@@ -1,7 +1,7 @@
 <?php
 session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
 
-$conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";

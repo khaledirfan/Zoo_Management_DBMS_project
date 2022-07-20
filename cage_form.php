@@ -1,5 +1,5 @@
 <?php
-  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+  $conn = oci_connect('nahrin', 'nahrin', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";

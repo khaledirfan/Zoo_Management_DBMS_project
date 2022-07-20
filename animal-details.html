@@ -310,92 +310,175 @@
 				</div>
 			</header>
 			<!-- header end-->
-			<main class="main">
-				<!-- promo start-->
-				<section class="promo-primary">
-					<picture>
-						<source srcset="img/animal-details.jpg" media="(min-width: 992px)"/><img class="img--bg" src="img/animal-details.jpg" alt="img"/>
-					</picture>
-					<div class="container">
-						<div class="row">
-							<div class="col-auto">
-								<div class="align-container">
-									<div class="align-container__item"><span class="promo-primary__pre-title">Wild World</span>
-										<h1 class="promo-primary__title"><span>Amur</span> <span>Tiger</span></h1>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<!-- promo end-->
-				<!-- section start-->
-				<section class="section animal-details">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-								<div class="row offset-30">
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<div class="animal-details__icon">
-											<svg class="icon">
-												<use xlink:href="#cat"></use>
-											</svg>
+		
+
+
+			<main id="main" style="margin-top: 80px;">
+
+				<!-- ============================================================== -->
+				<!-- wrapper  -->
+				<!-- ============================================================== -->
+				<div class="dashboard-wrapper">
+					<div class="dashboard-ecommerce">
+						<div class="container-fluid dashboard-content ">
+	
+							<!-- ============================================================== -->
+							<!-- pageheader  -->
+							<!-- ============================================================== -->
+							<div class="row">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<div class="page-header">
+										<h2 class="pageheader-title" style="text-align: center;"><?php echo $unome . "'s PROFILE" ?></h2>
+										<div>
+											<div class="page-breadcrumb">
+												<nav aria-label="breadcrumb">
+													<ol class="breadcrumb">
+														<li class="breadcrumb-item"><a href="dealer2.php" class="breadcrumb-link">Dealer</a></li>
+														<!-- <li class="breadcrumb-item"><a href="dealer_info.php" class="breadcrumb-link">Dealer's Information</a></li> -->
+														<li class="breadcrumb-item active" aria-current="page"><?php echo $unome . "'s profile" ?></li>
+													</ol>
+												</nav>
+											</div>
 										</div>
 									</div>
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<h6 class="animal-details__title">Conservation status</h6>
-										<p>Endangered</p>
-									</div>
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<h6 class="animal-details__title">Life span</h6>
-										<p>16-25 years</p>
-									</div>
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<h6 class="animal-details__title">Body size</h6>
-										<p>370-600 lbs. <br/> 6.5-11 ft.</p>
-									</div>
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<h6 class="animal-details__title">Native habitat</h6>
-										<p>Forests and bush-covered mountains of Eastern Russia, northeastern China, North Korea</p>
-									</div>
-									<div class="col-12 col-sm-6 col-md-4 bottom-30">
-										<h6 class="animal-details__title">Diet</h6>
-										<p>Deer, wild pig, fish, grass, nuts, berries</p>
-									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</section>
-				<!-- section end-->
-				<!-- section start-->
-				<section class="section"><img class="d-block section__bg height100 width100 t0" src="img/section-bg.png" alt="img"/>
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-								<h6 class="bottom-15">The Amur tiger is the largest of the tiger subspecies.</h6>
-								<p>The coat of the Amur tiger is the palest orange of all the tigers and has the fewest stripes. Each tiger’s stripes are unique and act as identifiers for other tigers. It has a scruff of fur around its neck that is more developed than other tigers, which helps protect it from the cold environment in which it lives. They generally live alone, but they do keep in contact with other tigers through scent marking. Another way they communicate is through scrapes on the ground, claw marks, and vocalizations.</p>
-								<div class="text-center top-30"><a class="button button--primary" href="#">Find on the map</a></div>
+							<!-- ============================================================== -->
+							<!-- end pageheader  -->
+							<!-- ============================================================== -->
+	
+	
+	
+							<!-- ============================================================== -->
+							<!-- Admin profile -->
+							<!-- ============================================================== -->
+	
+							<section class="admin_p about-section gray-bg" id="about">
+								<div class="container">
+									<div class="row align-items-center flex-row-reverse">
+										<div class="col-lg-6">
+											<div class="about-text go-to">
+												<h3 class="dark-color">About <?php echo $unome ?></h3>
+												<h6 class="theme-color lead">A Dealer of TCB food distribution system</h6>
+												<p>
+													dealer Id <?php echo $unome ?>, <mark><?php echo $raw["APPLICANT_NAME"] ?></mark> ,
+													deals products in <mark><?php echo "Area code " . $raw["AREA_CODE"] ?></mark>
+													of <?php echo $raw["ORGANIZATION_NAME"] ?> and his area is
+													<?php echo $raw["UPAZILLA"] . " under " . $raw["DISTRICT"] . " district. " ?>
+												</p>
+												<div class="row about-list">
+													<div class="col-md-6">
+														<div class="media">
+															<label>Birthday</label>
+															<p> <?php echo $raw['DATE_OF_BIRTH'] ?></p>
+														</div>
+														<div class="media">
+															<label>E-mail</label>
+															<p><?php echo $raw['EMAIL'] ?></p>
+	
+														</div>
+														<!-- <div class="media">
+															<label>Chember</label>
+															<p></p>
+														</div> -->
+														<div class="media">
+															<label>Address</label>
+															<p><?php echo $raw['PERMANENT_ADDRESS'] ?></p>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="media">
+															<label>Username</label>
+															<p><?php echo $raw['DEALER_ID'] ?></p>
+														</div>
+														<div class="media">
+															<label>Password</label>
+															<p><?php echo $raw['PASSWORD'] ?></p>
+														</div>
+														<div class="media">
+															<label>TIN number</label>
+															<p><?php echo $raw['TIN_NUMBER'] ?></p>
+														</div>
+	
+														<!-- <div class="media">
+															<label>Freelance</label>
+															<p>Available</p>
+														</div> -->
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="about-avatar">
+												<img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
+											</div>
+										</div>
+									</div>
+									<div class="counter">
+										<div class="row">
+											<!-- <div class="col-6 col-lg-3">
+												<div class="count-data text-center">
+													<h6 class="count h2" data-to="500" data-speed="500">500</h6>
+													<p class="m-0px font-w-600">Total Dealers</p>
+												</div>
+											</div> -->
+											<!-- <div class="col-6 col-lg-6">
+												<div class="count-data text-center">
+													<h6 class="count h2" data-to="150" data-speed="150">150</h6>
+													<p class="m-0px font-w-600">Customres under me</p>
+												</div>
+											</div>
+											<div class="col-6 col-lg-6">
+												<div class="count-data text-center">
+													<h6 class="count h2" data-to="850" data-speed="850">850</h6>
+													<p class="m-0px font-w-600">Availabe Packages</p>
+												</div>
+											</div> -->
+											<!-- <div class="col-6 col-lg-3">
+												<div class="count-data text-center">
+													<h6 class="count h2" data-to="190" data-speed="190">190</h6>
+													<p class="m-0px font-w-600">Total feedback</p>
+												</div>
+											</div> -->
+										</div>
+									</div>
+									<div class="counter">
+										<div class="row">
+											<div class="col-6 col-lg-4">
+												<div class="count-data text-center">
+													<h6 class="count h2"><a href="dealer_inventory.php" style="color:#38CE24 ;"><?php echo $unome ?>'s Inventory</a></h6>
+												</div>
+											</div>
+											<div class="col-6 col-lg-4">
+												<div class="count-data text-center">
+													<h6 class="count h2"><a href="dealer_customer2.php" style="color:#38CE24 ;"><?php echo $unome ?>'s Customers</a></h6>
+												</div>
+											</div>
+											<!-- <div class="col-6 col-lg-3">
+												<div class="count-data text-center">
+													<h6 class="count h2"><a href="package_info.php" style="color:#38CE24 ;">Package Info</a></h6>
+												</div>
+											</div> -->
+											<div class="col-6 col-lg-4">
+												<div class="count-data text-center">
+													<h6 class="count h2"><a href="dealer_treasury.html" style="color:#38CE24 ;"><?php echo $unome ?>'s Treasury</a></h6>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+	
+							<div class="page-breadcrumb">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb"></ol>
+								</nav>
 							</div>
 						</div>
+						<!-- ============================================================== -->
 					</div>
-				</section>
-				<!-- section end-->
-				<!-- section start-->
-				<section class="section no-padding-top no-padding-bottom">
-					<div class="row no-gutters">
-						<div class="col-lg-6"><a class="action-block" href="#">
-							<div class="action-block__inner"><img class="img--bg" src="img/action-block_8.jpg" alt="img"/>
-								<h3 class="action-block__title"><span>Arabic</span><br/> <span>Horse</span></h3>
-							</div></a></div>
-						<div class="col-lg-6"><a class="action-block" href="#">
-							<div class="action-block__inner"><img class="img--bg" src="img/action-block_9.jpg" alt="img"/>
-								<h3 class="action-block__title"><span>African</span><br/> <span>Eliphant</span></h3>
-							</div></a></div>
-					</div>
-				</section>
-				<!-- section end-->
-			</main>
+	
+			</main><!-- End #main -->
 			<!-- footer start-->
 			<footer class="footer"><img class="footer__bg img--bg" src="img/background__layout.png" alt="bg"/>
 				<div class="container">

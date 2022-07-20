@@ -1,12 +1,11 @@
 <?php
-  $conn = oci_connect('tst1', 'tst1', 'localhost/xe')
+  $conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
     if(isset($_POST['COMPLAINT_TYPE'])) {
-    // $COMPLAINT_NO = $_POST['COMPLAINT_NO'];
       
       $COMPLAINT_TYPE = $_POST['COMPLAINT_TYPE'];
       $COMPLAINT_DETAILS = $_POST['COMPLAINT_DETAILS'];

@@ -5,20 +5,31 @@ if (!$conn) {
   echo "sorry";
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['GENUS'])) {
-   
-      
-      $GENUS = $_POST['GENUS'];
+    if(isset($_POST['ANIMAL_ID'])) {
+      $ANIMAL_ID = $_POST['ANIMAL_ID'];
+      $ANIMAL_NAME = $_POST['ANIMAL_NAME'];
+      $NICKNAME = $_POST['NICKNAME'];
+      $AGE = $_POST['AGE'];
+      $GENDER = $_POST['GENDER'];
+      $CURRENT_CONDITION = $_POST['CURRENT_CONDITION'];
+      $CATEGORY = $_POST['CATEGORY'];
+      $ARRIVAL_PLACE = $_POST['ARRIVAL_PLACE'];
+      $ARRIVAL_DATE = $_POST['ARRIVAL_DATE'];
+      $BREEDING_STATUS = $_POST['BREEDING_STATUS'];
+      $ENDANGERED_STATUS = $_POST['ENDANGERED_STATUS'];
+      $ENVIRONMENT = $_POST['ENVIRONMENT'];
+      $PREVIOUS_AFFECTED_DISEASES = $_POST['PREVIOUS_AFFECTED_DISEASES'];
+      $PRICE = $_POST['PRICE'];
+      $LIFESPAN = $_POST['LIFESPAN'];
+      $SPECIAL_DIMENSION = $_POST['SPECIAL_DIMENSION'];
+      $A_HEIGHT = $_POST['A_HEIGHT'];
+      $A_WEIGHT = $_POST['A_WEIGHT'];
+      $DEATH = $_POST['DEATH'];
+      $CAUSE = $_POST['CAUSE'];
+      $CAGE_NO = $_POST['CAGE_NO'];
       $SPECIES = $_POST['SPECIES'];
-      $KINGDOM = $_POST['KINGDOM'];
-      $PHYLUM = $_POST['PHYLUM'];
-      $T_CLASS = $_POST['T_CLASS'];
-      $FAMILY = $_POST['FAMILY'];
-      $T_ORDER = $_POST['T_ORDER'];
-      
-
-      
-      $sql = "insert into taxonomy (GENUS,SPECIES,KINGDOM,PHYLUM,T_CLASS,FAMILY,T_ORDER) values ('$GENUS','$SPECIES','$KINGDOM','$PHYLUM','$T_CLASS','$FAMILY','$T_ORDER')";
+       
+      $sql = "insert into animal (ANIMAL_ID, ANIMAL_NAME, NICKNAME, AGE,GENDER,CURRENT_CONDITION,CATEGORY,ARRIVAL_PLACE,ARRIVAL_DATE,BREEDING_STATUS,ENDANGERED_STATUS,ENVIRONMENT,PREVIOUS_AFFECTED_DISEASES,PRICE,LIFESPAN,SPECIAL_DIMENSION,A_HEIGHT,A_WEIGHT,DEATH,CAUSE,CAGE_NO,SPECIES) values ('$ANIMAL_ID ',' $ANIMAL_NAME',' $NICKNAME ','$AGE','$GENDER','$CURRENT_CONDITION','$CATEGORY','$ARRIVAL_PLACE','$ARRIVAL_DATE','$BREEDING_STATUS','$ENDANGERED_STATUS','$ENVIRONMENT','$PREVIOUS_AFFECTED_DISEASES','$PRICE','$LIFESPAN ','$SPECIAL_DIMENSION','$A_HEIGHT ','$A_WEIGHT','$DEATH ','$CAUSE','$CAGE_NO','$SPECIES')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -36,7 +47,7 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>taxonomy_form</title>
+    <title>animal_form</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -53,6 +64,10 @@ if (!$conn) {
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
 
     <!-- web-font loader-->
@@ -643,110 +658,263 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
+      <!--,,,CAUSE,CAGE_NO,SPECIES) values ('$ANIMAL_ID ',' $ANIMAL_NAME',' $NICKNAME ','$AGE','$GENDER','$CURRENT_CONDITION','$CATEGORY','$ARRIVAL_PLACE','$ARRIVAL_DATE','$BREEDING_STATUS','$ENDANGERED_STATUS','$ENVIRONMENT','$PREVIOUS_AFFECTED_DISEASES','$PRICE','$LIFESPAN ','$SPECIAL_DIMENSION','$A_HEIGHT ','$A_WEIGHT','$DEATH ','$CAUSE','$CAGE_NO','$SPECIES')"; -->
       <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
             <div class="card mb-3">
-                <h5 class="text-center mb-4">Insert Taxonomic Info</h5>
-                <form class="form-card" action="taxonomy_form.php" method="post">
+                <h5 class="text-center mb-4">Add animal Info</h5>
+                <form class="form-card" action="" method="post">
 
 
-
-
-                    <!-- <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
-              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
-                       
-                    </div>
-                   </div> -->
 
 
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENUS" class="form-label">
-              <h6 class="mt-3">GENUS<font color="ff0000">*</font></h6>
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ANIMAL_ID" class="form-label">
+              <h6 class="mt-3">ANIMAL_ID <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="GENUS" name="GENUS" placeholder="GENUS" class="form-control text-left mr-2">         
+          <input type="text" id="ANIMAL_ID" name="ANIMAL_ID" placeholder="Enter Animal ID" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ANIMAL_NAME" class="form-label">
+              <h6 class="mt-3">ANIMAL_NAME <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ANIMAL_NAME" name="ANIMAL_NAME" placeholder="Enter Name" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="NICKNAME" class="form-label">
+              <h6 class="mt-3">NICKNAME <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="NICKNAME" name="NICKNAME" placeholder="Enter Nick Name" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="AGE" class="form-label">
+              <h6 class="mt-3">AGE(N)<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="NUMBER" id="AGE" name="AGE" placeholder="Enter AGE" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
 
                         <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="GENDER" class="form-label">
+              <h6 class="mt-3">GENDER <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="GENDER" name="GENDER" placeholder="Enter GENDER" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CATEGORY" class="form-label">
+              <h6 class="mt-3">CATEGORY<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CATEGORY" name="CATEGORY" placeholder="Enter CATEGORY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ARRIVAL_PLACE" class="form-label">
+              <h6 class="mt-3">ARRIVAL_PLACE <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ARRIVAL_PLACE" name="ARRIVAL_PLACE" placeholder="Enter ARRIVAL_PLACE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ARRIVAL_DATE" class="form-label">
+              <h6 class="mt-3">ARRIVAL_DATE <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ARRIVAL_DATE " name="ARRIVAL_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="BREEDING_STATUS" class="form-label">
+              <h6 class="mt-3">BREEDING_STATUS <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="BREEDING_STATUS" name="BREEDING_STATUS" placeholder="Enter BREEDING_STATUS" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ENVIRONMENT" class="form-label">
+              <h6 class="mt-3">ENVIRONMENT<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ENVIRONMENT" name="ENVIRONMENT" placeholder="Enter ENVIRONMENT" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PREVIOUS_AFFECTED_DISEASES" class="form-label">
+              <h6 class="mt-3">PREVIOUS_AFFECTED_DISEASES <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="PREVIOUS_AFFECTED_DISEASES" name="PREVIOUS_AFFECTED_DISEASES" placeholder="Enter PREVIOUS_AFFECTED_DISEASES" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PRICE" class="form-label">
+              <h6 class="mt-3">PRICE(N) <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="PRICE" name="PRICE" placeholder="Enter PRICE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIAL_DIMENSION" class="form-label">
+              <h6 class="mt-3">SPECIAL_DIMENSION <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="SPECIAL_DIMENSION" name="SPECIAL_DIMENSION" placeholder="Enter SPECIAL_DIMENSION" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+               
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="A_HEIGHT" class="form-label">
+              <h6 class="mt-3">A_HEIGHT(N) <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="NUMBER" id="A_HEIGHT" name="A_HEIGHT" placeholder="Enter A_HEIGHT" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="A_WEIGHT" class="form-label">
+              <h6 class="mt-3">A_WEIGHT(N) <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="NUMBER" id="A_WEIGHT" name="A_WEIGHT" placeholder="Enter WEIGHT" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+            
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="LIFESPAN" class="form-label">
+              <h6 class="mt-3">LIFESPAN <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="LIFESPAN" name="LIFESPAN" placeholder="Enter LIFESPAN" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="DEATH" class="form-label">
+              <h6 class="mt-3">DEATH<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="DEATH" name="DEATH" placeholder="Enter DEATH" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAUSE" class="form-label">
+              <h6 class="mt-3">CAUSE <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAUSE" name="CAUSE" placeholder="Enter CAUSE" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="CAGE_NO" class="form-label">
+              <h6 class="mt-3">CAGE_NO <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="CAGE_NO" name="CAGE_NO" placeholder="Enter CAGE_NO" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIES" class="form-label">
               <h6 class="mt-3">SPECIES <font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="text" id="SPECIES" name="SPECIES" placeholder="SPECIES" class="form-control text-left mr-2">         
+          <input type="text" id="SPECIES" name="SPECIES" placeholder="Enter SPECIES" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="LIFESPAN" class="form-label">
+              <h6 class="mt-3">LIFESPAN <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="LIFESPAN" name="LIFESPAN" placeholder="Enter LIFESPAN" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="ENDANGERED_STATUS" class="form-label">
+              <h6 class="mt-3">ENDANGERED_STATUS <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="ENDANGERED_STATUS" name="ENDANGERED_STATUS" placeholder="Enter Name" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   <div class="row justify-content-between text-left">
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
+              <h6 class="mt-3">Expiration Date<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<div class="input-group input-daterange">
+          <input type="date" id="datepicker" name="EXPIRATIONDATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+         
+                    </div>
+                   </div> -->
+
+                   <div class="form-group col-sm-12 flex-column d-flex">  <label for="CURRENT_CONDITION" class="form-label">
+              <h6 class="mt-3">CURRENT_CONDITION<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<!-- <div class="input-group input-daterange"> -->
+          <input type="text" id="CURRENT_CONDITION" name="CURRENT_CONDITION" placeholder="Enter" class="form-control text-left mr-2">         
+          
+                    <!-- </div> -->
                    </div>
 
                    
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="KINGDOM" class="form-label">
-              <h6 class="mt-3">KINGDOM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="KINGDOM" name="KINGDOM" placeholder="KINGDOM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="PHYLUM" class="form-label">
-              <h6 class="mt-3">PHYLUM <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="PHYLUM" name="PHYLUM" placeholder="PHYLUM" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_CLASS" class="form-label">
-              <h6 class="mt-3">CLASS<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_CLASS" name="T_CLASS" placeholder="T_CLASS" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="FAMILY" class="form-label">
-              <h6 class="mt-3">FAMILY<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="FAMILY" name="FAMILY" placeholder="FAMILY" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="T_ORDER" class="form-label">
-              <h6 class="mt-3">ORDER<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="T_ORDER" name="T_ORDER" placeholder="T_ORDER" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-
-                   <div class="row justify-content-between text-left">
-                        
                   
                    <button type="submit"  class="btn btn-primary mt-3">Submit</button>
 
@@ -1635,5 +1803,20 @@ if (!$conn) {
         $('#example').DataTable();
     });
     </script>
+
+
+<!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
+
   </body>
 </html>

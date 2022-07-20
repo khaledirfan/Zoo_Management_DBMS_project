@@ -703,11 +703,11 @@ if (!$conn) {
                                 <tr>
                                 <td>" . $row["EMPLOYEE_ID"] . "</td>
                                 <td>";
-                if ($_GET == NULL || ($_GET != NULL && $_GET['un'] == 'a')) {
+                if ($_GET == NULL || ($_GET != NULL )) {
                   echo "<a href='employee_profile.php?un=" . $row['EMPLOYEE_NAME'] . "'>";
                 }
                 echo  $row["EMPLOYEE_NAME"];
-                if ($_GET == NULL || ($_GET != NULL && $_GET['un'] == 'a')) {
+                if ($_GET == NULL || ($_GET != NULL )) {
                   echo "</a>";
                 }
                 echo "</td>
