@@ -14,7 +14,7 @@ if (!$conn) {
       $CURE_DISEASE = $_POST['CURE_DISEASE'];
       $EXPIRY_DATE = $_POST['EXPIRY_DATE'];
       $PRODUCTION_DATE = $_POST['PRODUCTION_DATE'];
-      $sql = "insert into vaccine (VACCINE_ID,VACCINE_NAME,ARRIVAL_DATE,TYPE,ENVIRONMENT_TYPE,CURE_DISEASE,EXPIRY_DATE,PRODUCTION_DATE) values ('$VACCINE_ID','$VACCINE_NAME', '$ARRIVAL_DATE', '$TYPE', '$ENVIRONMENT_TYPE', '$CURE_DISEASE', '$EXPIRY_DATE', '$PRODUCTION_DATE')";
+      $sql = "INSERT INTO VACCINE VALUES('$VACCINE_ID','$VACCINE_NAME','$ARRIVAL_DATE','$TYPE','$ENVIRONMENT_TYPE','$CURE_DISEASE','$EXPIRY_DATE','$PRODUCTION_DATE')";
       $stid = oci_parse($conn, $sql);
       $r = oci_execute($stid);
     }
@@ -682,7 +682,7 @@ if (!$conn) {
               <h6 class="mt-3">ARRIVAL_DATE<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="date" id="QUANTITY" name="ARRIVAL_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="TEXT" id="QUANTITY" name="ARRIVAL_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
@@ -734,7 +734,7 @@ if (!$conn) {
               <h6 class="mt-3">EXPIRY_DATE<font color="ff0000">*</font></h6>
             </label>
 			  
-          <input type="date" id="EXPIRY_DATE" name="EXPIRY_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="TEXT" id="EXPIRY_DATE" name="EXPIRY_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>
                    </div>
@@ -749,7 +749,7 @@ if (!$conn) {
             </label>
 			  
 		<div class="input-group input-daterange">
-          <input type="date" id="PRODUCTION_DATE" name="PRODUCTION_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
+          <input type="TEXT" id="PRODUCTION_DATE" name="PRODUCTION_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
           <!-- <span class="fa fa-calendar" id="fa-1"></span></div> -->
                         <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
                     </div>

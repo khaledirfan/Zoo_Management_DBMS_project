@@ -1,25 +1,26 @@
 <?php
-  $conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
+
+$conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-    if(isset($_POST['COMPLAINT_TYPE'])) {
-      
-      $COMPLAINT_TYPE = $_POST['COMPLAINT_TYPE'];
-      $COMPLAINT_DETAILS = $_POST['COMPLAINT_DETAILS'];
-
-      $COMPLAINT_DATE = $_POST['COMPLAINT_DATE'];
-      $sql = "insert into COMPLAINTS (COMPLAINT_NO, COMPLAINT_TYPE, COMPLAINT_DETAILS,COMPLAINT_DATE) values (COMPLAINTS_COMPLAINT_NO_SEQ.NEXTVAL ,'$COMPLAINT_TYPE','$COMPLAINT_DETAILS',' $COMPLAINT_DATE')";
-      $stid = oci_parse($conn, $sql);
-      $r = oci_execute($stid);
-    }
-  }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+        if(isset($_POST['TICKET_ID'])) {
+          $TICKET_ID = $_POST['TICKET_ID'];
+          $TICKET = $_POST['TICKET'];
+          $BUYING_DATE = $_POST['BUYING_DATE'];
+          $BUYING_TIME = $_POST['BUYING_TIME'];
+          $BUYING_TIME = $_POST['BUYING_TIME'];
+          $sql = "insert into food (FOODNAME, QUANTITY, FOODTYPE, EXPIRATIONDATE) values ('$FOODNAME',' $QUANTITY','$FOODTYPE',to_date('$EXPIRATIONDATE','mm-dd-yyyy'))";
+          $stid = oci_parse($conn, $sql);
+          $r = oci_execute($stid);
+        }
+      }
 }
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,11 +30,24 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>complaint_form</title>
+    <title>ticket</title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-      <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
+    <!-- favicon icon added  -->
+     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
+
+     <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -45,12 +59,6 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="food_form.css">
-
-    <!-- billu bhai er code -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
 
 
     <!-- web-font loader-->
@@ -80,315 +88,775 @@ if (!$conn) {
 
       font();
     </script>
+    <STYle>
+        /*--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+/*-- reset --*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*-- start editing from here --*/
+a {
+  text-decoration: none;
+}
+
+.txt-rt {
+  text-align: right;
+}
+
+/* text align right */
+.txt-lt {
+  text-align: left;
+}
+
+/* text align left */
+.txt-center {
+  text-align: center;
+}
+
+/* text align center */
+.float-rt {
+  float: right;
+}
+
+/* float right */
+.float-lt {
+  float: left;
+}
+
+/* float left */
+.clear {
+  clear: both;
+}
+
+/* clear float */
+.pos-relative {
+  position: relative;
+}
+
+/* Position Relative */
+.pos-absolute {
+  position: absolute;
+}
+
+/* Position Absolute */
+.vertical-base {
+  vertical-align: baseline;
+}
+
+/* vertical align baseline */
+.vertical-top {
+  vertical-align: top;
+}
+
+/* vertical align top */
+nav.vertical ul li {
+  display: block;
+}
+
+/* vertical menu */
+nav.horizontal ul li {
+  display: inline-block;
+}
+
+/* horizontal menu */
+img {
+  max-width: 100%;
+}
+
+/*-- end reset --*/
+body {
+  background: #76b852;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #76b852, #8DC26F);
+  background: -moz-linear-gradient(to top, #76b852, #8DC26F);
+  background: -o-linear-gradient(to top, #76b852, #8DC26F);
+  background: linear-gradient(to top, #76b852, #8DC26F);
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 3em;
+  text-align: center;
+  color: #fff;
+  font-weight: 100;
+  text-transform: capitalize;
+  letter-spacing: 4px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/*-- main --*/
+.main-w3layouts {
+  padding: 3em 0 1em;
+}
+
+.main-agileinfo {
+  width: 35%;
+  margin: 3em auto;
+  background: rgba(0, 0, 0, 0.18);
+  background-size: cover;
+}
+
+.agileits-top {
+  padding: 3em;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  font-size: 0.9em;
+  color: #fff;
+  font-weight: 100;
+  width: 94.5%;
+  display: block;
+  border: none;
+  padding: 0.8em;
+  border: solid 1px rgba(255, 255, 255, 0.37);
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+  background-position: -800px 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+input.email, input.text.w3lpass {
+  margin: 2em 0;
+}
+
+.text:focus, .text:valid {
+  box-shadow: none;
+  outline: none;
+  background-position: 0 0;
+}
+
+.text:focus::-webkit-input-placeholder, .text:valid::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: .9em;
+  -webkit-transform: translateY(-30px);
+  -moz-transform: translateY(-30px);
+  -o-transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  transform: translateY(-30px);
+  visibility: visible !important;
+}
+
+::-webkit-input-placeholder {
+  color: #fff;
+  font-weight: 100;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff;
+}
+
+:-ms-input-placeholder {
+  color: #fff;
+}
+
+input[type="submit"] {
+  font-size: .9em;
+  color: #fff;
+  background: #76b852;
+  outline: none;
+  border: 1px solid #76b852;
+  cursor: pointer;
+  padding: 0.9em;
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 2em 0;
+  letter-spacing: 4px;
+}
+
+input[type="submit"]:hover {
+  -webkit-transition: .5s all;
+  -moz-transition: .5s all;
+  -o-transition: .5s all;
+  -ms-transition: .5s all;
+  transition: .5s all;
+  background: #8DC26F;
+}
+
+.agileits-top p {
+  font-size: 1em;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.agileits-top p a {
+  color: #fff;
+  -webkit-transition: .5s all;
+  -moz-transition: .5s all;
+  transition: .5s all;
+  font-weight: 400;
+}
+
+.agileits-top p a:hover {
+  color: #76b852;
+}
+
+/*-- //main --*/
+/*-- checkbox --*/
+.wthree-text label {
+  font-size: 0.9em;
+  color: #fff;
+  font-weight: 200;
+  cursor: pointer;
+  position: relative;
+}
+
+input.checkbox {
+  background: #8DC26F;
+  cursor: pointer;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+input.checkbox:before {
+  content: "";
+  position: absolute;
+  width: 1.2em;
+  height: 1.2em;
+  background: inherit;
+  cursor: pointer;
+}
+
+input.checkbox:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  z-index: 1;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid #fff;
+  -webkit-transition: .4s ease-in-out;
+  -moz-transition: .4s ease-in-out;
+  -o-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+input.checkbox:checked:after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  height: .5rem;
+  border-color: #fff;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.anim input.checkbox:checked:after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  height: .5rem;
+  border-color: transparent;
+  border-right-color: transparent;
+  animation: .4s rippling .4s ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rippling {
+  50% {
+    border-left-color: #fff;
+  }
+
+  100% {
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+  }
+}
+
+/*-- //checkbox --*/
+/*-- copyright --*/
+.colorlibcopy-agile {
+  margin: 2em 0 1em;
+  text-align: center;
+}
+
+.colorlibcopy-agile p {
+  font-size: .9em;
+  color: #fff;
+  line-height: 1.8em;
+  letter-spacing: 1px;
+  font-weight: 100;
+}
+
+.colorlibcopy-agile p a {
+  color: #fff;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+}
+
+.colorlibcopy-agile p a:hover {
+  color: #000;
+}
+
+/*-- //copyright --*/
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.colorlib-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.colorlib-bubbles li {
+  position: absolute;
+  list-style: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.15);
+  bottom: -160px;
+  -webkit-animation: square 20s infinite;
+  -moz-animation: square 250s infinite;
+  -o-animation: square 20s infinite;
+  -ms-animation: square 20s infinite;
+  animation: square 20s infinite;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  transition-timing-function: linear;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.colorlib-bubbles li:nth-child(1) {
+  left: 10%;
+}
+
+.colorlib-bubbles li:nth-child(2) {
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 2s;
+  -o-animation-delay: 2s;
+  -ms-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-duration: 17s;
+  -moz-animation-duration: 17s;
+  -o-animation-duration: 17s;
+  animation-duration: 17s;
+}
+
+.colorlib-bubbles li:nth-child(3) {
+  left: 25%;
+  -webkit-animation-delay: 4s;
+  -moz-animation-delay: 4s;
+  -o-animation-delay: 4s;
+  -ms-animation-delay: 4s;
+  animation-delay: 4s;
+}
+
+.colorlib-bubbles li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation-duration: 22s;
+  -moz-animation-duration: 22s;
+  -o-animation-duration: 22s;
+  -ms-animation-duration: 22s;
+  animation-duration: 22s;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.colorlib-bubbles li:nth-child(5) {
+  left: 70%;
+}
+
+.colorlib-bubbles li:nth-child(6) {
+  left: 80%;
+  width: 120px;
+  height: 120px;
+  -webkit-animation-delay: 3s;
+  -moz-animation-delay: 3s;
+  -o-animation-delay: 3s;
+  -ms-animation-delay: 3s;
+  animation-delay: 3s;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.colorlib-bubbles li:nth-child(7) {
+  left: 32%;
+  width: 160px;
+  height: 160px;
+  -webkit-animation-delay: 7s;
+  -moz-animation-delay: 7s;
+  -o-animation-delay: 7s;
+  -ms-animation-delay: 7s;
+  animation-delay: 7s;
+}
+
+.colorlib-bubbles li:nth-child(8) {
+  left: 55%;
+  width: 20px;
+  height: 20px;
+  -webkit-animation-delay: 15s;
+  -moz-animation-delay: 15s;
+  animation-delay: 15s;
+  -webkit-animation-duration: 40s;
+  -moz-animation-duration: 40s;
+  animation-duration: 40s;
+}
+
+.colorlib-bubbles li:nth-child(9) {
+  left: 25%;
+  width: 10px;
+  height: 10px;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-duration: 40s;
+  animation-duration: 40s;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.colorlib-bubbles li:nth-child(10) {
+  left: 90%;
+  width: 160px;
+  height: 160px;
+  -webkit-animation-delay: 11s;
+  animation-delay: 11s;
+}
+
+@-webkit-keyframes square {
+  0% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(-700px) rotate(600deg);
+    -moz-transform: translateY(-700px) rotate(600deg);
+    -o-transform: translateY(-700px) rotate(600deg);
+    -ms-transform: translateY(-700px) rotate(600deg);
+    transform: translateY(-700px) rotate(600deg);
+  }
+}
+
+@keyframes square {
+  0% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(-700px) rotate(600deg);
+    -moz-transform: translateY(-700px) rotate(600deg);
+    -o-transform: translateY(-700px) rotate(600deg);
+    -ms-transform: translateY(-700px) rotate(600deg);
+    transform: translateY(-700px) rotate(600deg);
+  }
+}
+
+/*-- responsive-design --*/
+@media(max-width:1440px) {
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 94%;
+  }
+}
+
+@media(max-width:1366px) {
+  h1 {
+    font-size: 2.6em;
+  }
+
+  .agileits-top {
+    padding: 2.5em;
+  }
+
+  .main-agileinfo {
+    margin: 2em auto;
+  }
+
+  .main-agileinfo {
+    width: 36%;
+  }
+}
+
+@media(max-width:1280px) {
+  .main-agileinfo {
+    width: 40%;
+  }
+}
+
+@media(max-width:1080px) {
+  .main-agileinfo {
+    width: 46%;
+  }
+}
+
+@media(max-width:1024px) {
+  .main-agileinfo {
+    width: 49%;
+  }
+}
+
+@media(max-width:991px) {
+  h1 {
+    font-size: 2.4em;
+  }
+
+  .main-w3layouts {
+    padding: 2em 0 1em;
+  }
+}
+
+@media(max-width:900px) {
+  .main-agileinfo {
+    width: 58%;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 93%;
+  }
+}
+
+@media(max-width:800px) {
+  h1 {
+    font-size: 2.2em;
+  }
+}
+
+@media(max-width:736px) {
+  .main-agileinfo {
+    width: 62%;
+  }
+}
+
+@media(max-width:667px) {
+  .main-agileinfo {
+    width: 67%;
+  }
+}
+
+@media(max-width:600px) {
+  .agileits-top {
+    padding: 2.2em;
+  }
+
+  input.email, input.text.w3lpass {
+    margin: 1.5em 0;
+  }
+
+  input[type="submit"] {
+    margin: 2em 0;
+  }
+
+  h1 {
+    font-size: 2em;
+    letter-spacing: 3px;
+  }
+}
+
+@media(max-width:568px) {
+  .main-agileinfo {
+    width: 75%;
+  }
+
+  .colorlibcopy-agile p {
+    padding: 0 2em;
+  }
+}
+
+@media(max-width:480px) {
+  h1 {
+    font-size: 1.8em;
+    letter-spacing: 3px;
+  }
+
+  .agileits-top {
+    padding: 1.8em;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 91%;
+  }
+
+  .agileits-top p {
+    font-size: 0.9em;
+  }
+}
+
+@media(max-width:414px) {
+  h1 {
+    font-size: 1.8em;
+    letter-spacing: 2px;
+  }
+
+  .main-agileinfo {
+    width: 85%;
+    margin: 1.5em auto;
+  }
+
+  .text:focus, .text:valid {
+    background-position: 0 0px;
+  }
+
+  .wthree-text ul li, .wthree-text ul li:nth-child(2) {
+    display: block;
+    float: none;
+  }
+
+  .wthree-text ul li:nth-child(2) {
+    margin-top: 1.5em;
+  }
+
+  input[type="submit"] {
+    margin: 2em 0 1.5em;
+    letter-spacing: 3px;
+  }
+
+  input[type="submit"] {
+    margin: 2em 0 1.5em;
+  }
+
+  .colorlibcopy-agile {
+    margin: 1em 0 1em;
+  }
+}
+
+@media(max-width:384px) {
+  .main-agileinfo {
+    width: 88%;
+  }
+
+  .colorlibcopy-agile p {
+    padding: 0 1em;
+  }
+}
+
+@media(max-width:375px) {
+  .agileits-top p {
+    letter-spacing: 0px;
+  }
+}
+
+@media(max-width:320px) {
+  .main-w3layouts {
+    padding: 1.5em 0 0;
+  }
+
+  .agileits-top {
+    padding: 1.2em;
+  }
+
+  .colorlibcopy-agile {
+    margin: 0 0 1em;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 89.5%;
+    font-size: 0.85em;
+  }
+
+  h1 {
+    font-size: 1.7em;
+    letter-spacing: 0px;
+  }
+
+  .main-agileinfo {
+    width: 92%;
+    margin: 1em auto;
+  }
+
+  .text:focus, .text:valid {
+    background-position: 0 0px;
+  }
+
+  input[type="submit"] {
+    margin: 1.5em 0;
+    padding: 0.8em;
+    font-size: .85em;
+  }
+
+  .colorlibcopy-agile p {
+    font-size: .85em;
+  }
+
+  .wthree-text label {
+    font-size: 0.85em;
+  }
+
+  .main-w3layouts {
+    padding: 1em 0 0;
+  }
+}
+    </STYle>
   </head>
   <body>
     <div class="page-wrapper">
-      <!-- menu dropdown start-->
-      <!-- <div class="menu-dropdown">
-        <div class="menu-dropdown__inner" data-value="start">
-          <div class="screen screen--start">
-            <div
-              class="screen__item screen--trigger item--active"
-              data-category="home"
-            >
-              <span>VISIT</span
-              ><span>
-                <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
-            </div>
-            <div class="screen__item screen--trigger" data-category="pages">
-              <span>THINGS TO DO</span
-              ><span>
-                <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="blog.html">LEARN AND RESEARCH</a>
-            </div>
-            <div class="screen__item screen--trigger" data-category="shop">
-              <span>ANIMAL</span>
-              <span>
-                <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="contacts.html">MUSEUM</a>
-            </div>
-            <div class="screen__item screen--trigger" data-category="elements">
-              <span>ABOUT</span
-              ><span>
-                <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
-            </div>
-            <div class="screen__item screen--trigger" data-category="language">
-              <span>SUPPORT US</span
-              ><span>
-                <svg class="icon">
-                  <use xlink:href="#chevron"></use>
-                </svg>
-              </span>
-            </div>
-            <ul class="screen__socials">
-              <li>
-                <a class="item--facebook" href="#"
-                  ><i class="fa fa-facebook" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a class="item--twitter" href="#"
-                  ><i class="fa fa-twitter" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a class="item--youtube" href="#"
-                  ><i class="fa fa-youtube-play" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a class="item--instagram" href="#"
-                  ><i class="fa fa-instagram" aria-hidden="true"></i
-                ></a>
-              </li>
-            </ul>
-            <a class="screen__button" href="#">Tickets</a>
-          </div>
-        </div>
-        <div class="menu-dropdown__inner" data-value="home">
-          <div class="screen screen--sub">
-            <div class="screen__heading">
-              <h6 class="screen__back">
-                <svg class="icon">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-                <span>Home</span>
-              </h6>
-            </div>
-            <div class="screen__item item--active">
-              <a class="screen__link" href="index.html">Home Zoo</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="front_2.html">Home Aquarium</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="front_3.html">Home Terrarium</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="front_4.html">Home Protections</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="front_5.html">Home Safari</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="front_6.html">Home Shop</a>
-            </div>
-          </div>
-        </div>
-        <div class="menu-dropdown__inner" data-value="pages">
-          <div class="screen screen--sub">
-            <div class="screen__heading">
-              <h6 class="screen__back">
-                <svg class="icon">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-                <span>Pages</span>
-              </h6>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="about.html">About</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="services.html">Services</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="blog-details.html">Blog Details</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="gallery.html">Gallery</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="gallery_2.html">Gallery v.2</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="calendar.html">Calendar</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="membership.html">Membership</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="events.html">Events</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="event-details.html"
-                >Event Details</a
-              >
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="tickets.html">Tickets</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="foundation.html">Foundation</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="education.html">Education</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="donation.html">Donation</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="donation-details.html"
-                >Donation Details</a
-              >
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="animals.html">Animals</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="animal-details.html"
-                >Animal Details</a
-              >
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="safari-tours.html">Safari Tours</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="tour-details.html">Tour Details</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="typography.html">Typography</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="faq.html">Faq</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="map.html">Map</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="404.html">404</a>
-            </div>
-          </div>
-        </div>
-        <div class="menu-dropdown__inner" data-value="shop">
-          <div class="screen screen--sub">
-            <div class="screen__heading">
-              <h6 class="screen__back">
-                <svg class="icon">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-                <span>Shop</span>
-              </h6>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="shop-catalog.html">Shop Catalog</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="shop-product.html">Shop Product</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="shop-cart.html">Shop Cart</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="shop-checkout.html"
-                >Shop Checkout</a
-              >
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="shop-account.html">Shop Account</a>
-            </div>
-          </div>
-        </div>
-        <div class="menu-dropdown__inner" data-value="elements">
-          <div class="screen screen--sub">
-            <div class="screen__heading">
-              <h6 class="screen__back">
-                <svg class="icon">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-                <span>Elements</span>
-              </h6>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="accordion.html">Accordion</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="alerts.html">Alerts</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="breadcrumbs.html">Breadcrumbs</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="buttons.html">Buttons</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="charts.html">Charts</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="counters.html">Counters</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="forms.html">Forms</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="icon-list.html">Icon List</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="logos.html">Logos</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="paginations.html">Paginations</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="pricing-tables.html"
-                >Pricing Tables</a
-              >
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="tabs.html">Tabs</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="team.html">Tean</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="testimonials.html">Testimonials</a>
-            </div>
-          </div>
-        </div>
-        <div class="menu-dropdown__inner" data-value="language">
-          <div class="screen screen--sub">
-            <div class="screen__heading">
-              <h6 class="screen__back">
-                <svg class="icon">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-                <span>Language</span>
-              </h6>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="javascript:void(0);">English</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="javascript:void(0);">French</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="javascript:void(0);">Spanish</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="javascript:void(0);">Deutsch</a>
-            </div>
-            <div class="screen__item">
-              <a class="screen__link" href="javascript:void(0);">Russian</a>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
+    
       <!-- menu dropdown end-->
 
       <!-- header start-->
@@ -561,26 +1029,7 @@ if (!$conn) {
                     ><span>Complain</span></a
                   >
                 </li>
-                <!-- <li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Elements</span></a> -->
-                <!-- sub menu start-->
-                <!-- <ul class="main-menu__sub-list sub-list--style-2">
-										<li><a href="accordion.html"><span>Accordion</span></a></li>
-										<li><a href="charts.html"><span>Charts</span></a></li>
-										<li><a href="alerts.html"><span>Alerts</span></a></li>
-										<li><a href="counters.html"><span>Counters</span></a></li>
-										<li><a href="logos.html"><span>Logos</span></a></li>
-										<li><a href="forms.html"><span>Forms</span></a></li>
-										<li><a href="tabs.html"><span>Tabs</span></a></li>
-										<li><a href="buttons.html"><span>Buttons</span></a></li>
-										<li><a href="paginations.html"><span>Paginations</span></a></li>
-										<li><a href="team.html"><span>Team</span></a></li>
-										<li><a href="breadcrumbs.html"><span>Bread Crumbs</span></a></li>
-										<li><a href="icon-list.html"><span>Icon List</span></a></li>
-										<li><a href="pricing-tables.html"><span>Pricing Tables</span></a></li>
-										<li><a href="testimonials.html"><span>Testimonials</span></a></li>
-									</ul> -->
-                <!-- sub menu end-->
-                <!-- </li> -->
+                
               </ul>
               <!-- main menu end--><a
                 class="header__button"
@@ -597,38 +1046,7 @@ if (!$conn) {
             </div>
           </div>
         </div>
-        <!-- <div class="header__lower">
-					<div class="row">
-						<div class="col-auto d-flex align-items-center">
-							<ul class="lower-menu">
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Membership</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Education</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Map Zoo</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Events</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Donate</a></li>
-								<li class="lower-menu__item"><a class="lower-menu__link" href="#">Foundation</a></li>
-							</ul> -->
-        <!-- lang select start-->
-        <!-- <ul class="lang-select">
-								<li class="lang-select__item lang-select__item--active"><span>English</span>
-									<ul class="lang-select__sub-list">
-										<li><a href="#">French</a></li>
-										<li><a href="#">Spanish</a></li>
-										<li><a href="#">Deutsch</a></li>
-										<li><a href="#">Russian</a></li>
-									</ul>
-								</li>
-							</ul> -->
-        <!-- lang select end-->
-        <!-- <ul class="header__socials">
-								<li><a class="item--facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a class="item--twitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a class="item--youtube" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-								<li><a class="item--instagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div> -->
+        
       </header>
 
       <!-- navigation bar ended  -->
@@ -641,77 +1059,48 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-      <div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-           
-            <div class="card mb-3">
-                <h5 class="text-center mb-4">Submit your complaints</h5>
-                <form class="form-card" action="complaint_form.php" method="post">
 
-
-
-
-                    <!-- <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_NO" class="form-label">
-              <h6 class="mt-3">Complaint No: <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_NO" name="COMPLAINT_NO" placeholder="Enter Complaint " class="form-control text-left mr-2">         
-                       
-                    </div>
-                   </div> -->
-
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="Complaint Type" class="form-label">
-              <h6 class="mt-3">Complaint Type<font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_TYPE	" name="COMPLAINT_TYPE" placeholder="complaint type" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-                        <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DETAILS" class="form-label">
-              <h6 class="mt-3">Details <font color="ff0000">*</font></h6>
-            </label>
-			  
-          <input type="text" id="COMPLAINT_DETAILS" name="COMPLAINT_DETAILS" placeholder="Write the details" class="form-control text-left mr-2">         
-                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
-                    </div>
-                   </div>
-
-
-                   <div class="row justify-content-between text-left">
-                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DATE" class="form-label">
-              <h6 class="mt-3"> Date<font color="ff0000">*</font></h6>
-            </label>
-			  
-		<div class="input-group input-daterange">
-          <input type="date" id="COMPLAINT_DATE" name="COMPLAINT_DATE" placeholder="DD/MM/YYYY" class="form-control text-left mr-2">         
-          
-                    </div>
-                   </div> -->
-
-                                      <div class="form-group col-sm-12 flex-column d-flex">  <label for="COMPLAINT_DATE" class="form-label">
-              <h6 class="mt-3">date<font color="ff0000">*</font></h6>
-            </label>
-			  
-		<!-- <div class="input-group input-daterange"> -->
-          <input type="text" id="datepicker" name="COMPLAINT_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
-          
-                    <!-- </div> -->
-                   </div>
-                  
-                   <button type="submit"  class="btn btn-primary mt-3">Submit</button>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+      <div class="main-w3layouts wrapper">
+        <div style="margin-top:100px"></div>
+		<h1>BUY TICKETS</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="#" method="post">
+                <input class="text" type="text" name="TICKET_ID" placeholder="TICKET_TYPE ID" required="">
+					<input class="text" type="text" name="TICKET" placeholder="TICKET_TYPE" required="">
+					<input class="text " type="email" name="BUYING_DATE" placeholder="BUYING_DATE" required="">
+					<input class="text" type="TIME" name="BUYING_TIME" placeholder="BUYING_TIME" required="">
+                    <input class="text" type="TEXT" name="TICKET PRICE" placeholder="TICKET PRICE" required="">
+					<div class="wthree-text">
+						<label class="anim">
+							<input type="checkbox" class="checkbox" required="">
+							<span>I Agree To The Terms & Conditions</span>
+						</label>
+						<div class="clear"> </div>
+					</div>
+					<input type="submit" value="BUY">
+				</form>
+				
+			</div>
+		</div>
+		<!-- copyright -->
+		<div class="colorlibcopy-agile">
+			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+		</div>
+		<!-- //copyright -->
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
 
 
 
@@ -782,32 +1171,6 @@ if (!$conn) {
               </ul>
             </div>
             <div class="col-md-7 col-xl-5 d-none d-md-block">
-              <!-- <h6 class="footer__title">Menu & Links</h6> -->
-              <!-- <ul class="footer-menu">
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Home</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Membership </a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Pages</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Education</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Animals</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Support</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Schedule</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Events</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Gallery</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Blog</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Contacts</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Donate</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Foundation</a></li>
-								<li class="footer-menu__item"><a class="footer-menu__link" href="#">Tickets</a></li>
-							</ul>
-							<ul class="footer-submenu">
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Documents</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Association of Zoo</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Aqurium</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terrarium</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Terra Park</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Cooperation</a></li>
-								<li class="footer-submenu__item"><a class="footer-submenu__link" href="#">Libriry</a></li>
-							</ul> -->
             </div>
             <div class="col-lg-3 d-none d-xl-block">
               <h6 class="footer__title">
@@ -1586,24 +1949,10 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
     </script>
-
-    <!-- billu bhai returns -->
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  <script>
-    $(function() {
-      $("#datepicker").datepicker({
-        changeMonth: true,
-        changeYear: true
-      });
-    });
-  </script>
   </body>
 </html>
