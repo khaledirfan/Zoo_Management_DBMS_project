@@ -1,5 +1,5 @@
 <?php
-  $conn = oci_connect('SABIKUNZERIN', '1234', 'localhost/xe')
+  $conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";

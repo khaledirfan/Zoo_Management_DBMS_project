@@ -1,14 +1,28 @@
 <?php
-session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
-
-$conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
+  $conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
-}
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+    if(isset($_POST['SPECIMEN_ID'])) {
+      $SPECIMEN_ID = $_POST['SPECIMEN_ID'];
+      $S_CATEGORY = $_POST['S_CATEGORY'];
+      $MU_SPECIES = $_POST['MU_SPECIES'];
+      $S_TOTAL_COUNT = $_POST['S_TOTAL_COUNT'];
+      $S_COLLECTION_DATE = $_POST['S_COLLECTION_DATE'];
+      $S_PRESERVATION_CHEMICAL = $_POST['S_PRESERVATION_CHEMICAL'];
+      $EMPLOYEE_ID = $_POST['EMPLOYEE_ID'];
 
+      $sql = "insert into museum(SPECIMEN_ID,S_CATEGORY, MU_SPECIES, S_TOTAL_COUNT,S_COLLECTION_DATE, S_PRESERVATION_CHEMICAL,EMPLOYEE_ID) values ('$SPECIMEN_ID',' $S_CATEGORY','$MU_SPECIES','$S_TOTAL_COUNT','$S_COLLECTION_DATE','$S_PRESERVATION_CHEMICAL',' $EMPLOYEE_ID')";
+      $stid = oci_parse($conn, $sql);
+      $r = oci_execute($stid);
+    }
+  }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +32,11 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>vaccine</title>
+    <title>museum </title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- favicon icon added  -->
-     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
-
-     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-    />
+    <link rel="icon" type="image/x-icon" href="/img/zoo.ico">
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -47,6 +48,11 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
 
     <!-- web-font loader-->
@@ -396,7 +402,7 @@ if (!$conn) {
         <div class="header__top">
           <div class="row align-items-center">
             <div class="col-6 col-lg-4">
-              <a class="logo" href="index.html"
+              <a class="logo" href="index.php"
                 ><img
                   class="logo__img col-lg-12"
                   src="img/logo/org5.png"
@@ -637,72 +643,114 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-
-       <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
-  
-              <div class="container pt-5 pb-5">
-        <div class="card">
-          <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Vaccine Info:</h1>
-            <a href="vaccine_form.php"
-              ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Vaccine
-              </button></a
-            >
-          </div>
-        </div>
-      </div>
-                  
-                </div>
-
-       <div class="card-body" style="margin-top:25px">
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <!-- <th>SI No</th> -->
-                <th>Vaccine Id</th>
-                <th>Vaccine Name</th>
-                <th>Arrival Date</th>
-                <th>Type</th>
-                <th>Preservation Environment</th>
-                <th>Cure Disease</th>
-                <th>Expiry Date</th>
-                <th>Production Date</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                   <?php
-                                $sql = "select *from VACCINE";
-                                $stid = oci_parse($conn, $sql);
-                                $r = oci_execute($stid);
-                                while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
-                                {
-                
-                                echo "
-                                <tr>
-                                <td>" . $row["VACCINE_ID"] . "</td>
-                                <td>" . $row["VACCINE_NAME"] . "</td>
-                                <td>" . $row["ARRIVAL_DATE"] . "</td>
-                                <td>" . $row["TYPE"] . "</td>
-                                <td>" . $row["ENVIRONMENT_TYPE"] . "</td>
-                                <td>" . $row["CURE_DISEASE"] . "</td>
-                                <td>" . $row["EXPIRY_DATE"] . "</td>
-                                <td>" . $row["PRODUCTION_DATE"] . "</td>
-                                </tr>
-                                ";
-                                }
-
-
-              ?>
-
+      <div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
            
-      
-        </tbody>
-    </table>
+            <div class="card mb-3">
+                <h5 class="text-center mb-4">Add Specimen Info</h5>
+                <form class="form-card" action="museum_form.php" method="post">
 
-  
-   </div>
+
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="SPECIMEN_ID" class="form-label">
+              <h6 class="mt-3">Specimen ID <font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="SPECIMEN_ID" name="SPECIMEN_ID" placeholder="Enter specimen ID" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="S_CATEGORY" class="form-label">
+              <h6 class="mt-3">Category<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="S_CATEGORY" name="S_CATEGORY" placeholder="Enter" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="MU_SPECIES" class="form-label">
+              <h6 class="mt-3">MU SPECIES<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="MU_SPECIES" name="MU_SPECIES" placeholder="Enter" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   <div class="row justify-content-between text-left">
+                        <!-- <div class="form-group col-sm-12 flex-column d-flex">  <label for="EXPIRATIONDATE" class="form-label">
+              <h6 class="mt-3">Expiration Date<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<div class="input-group input-daterange">
+          <input type="date" id="datepicker" name="EXPIRATIONDATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+         
+                    </div>
+                   </div> -->
+
+                   <div class="form-group col-sm-12 flex-column d-flex">  <label for="S_TOTAL_COUNT" class="form-label">
+              <h6 class="mt-3">Total Count<font color="ff0000">*</font></h6>
+            </label>
+			  
+		<!-- <div class="input-group input-daterange"> -->
+          <input type="text" id="S_TOTAL_COUNT" name="S_TOTAL_COUNT" placeholder="" class="form-control text-left mr-2">         
+          
+                    <!-- </div> -->
+                   </div>
+
+                     <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="S_COLLECTION_DATE" class="form-label">
+              <h6 class="mt-3">COLLECTION DATE <font color="ff0000">*</font></h6>
+            </label>
+			  
+         <div class="input-group input-daterange">
+          <input type="date" id="S_COLLECTION_DATE" name="S_COLLECTION_DATE" placeholder="MM/DD/YYYY" class="form-control text-left mr-2">         
+         
+                    </div>
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+                   
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="MU_SPECIES" class="form-label">
+              <h6 class="mt-3">PRESERVATION CHEMICAL<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="S_PRESERVATION_CHEMICAL" name="S_PRESERVATION_CHEMICAL" placeholder="Enter" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+
+
+                   
+                        <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-12 flex-column d-flex">  <label for="EMPLOYEE_ID" class="form-label">
+              <h6 class="mt-3">EMPLOYEE ID<font color="ff0000">*</font></h6>
+            </label>
+			  
+          <input type="text" id="EMPLOYEE_ID" name="EMPLOYEE_ID" placeholder="Enter" class="form-control text-left mr-2">         
+                        <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div> -->
+                    </div>
+                   </div>
+                   
+                  
+                  <button type="submit"  class="btn btn-primary mt-3">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -1577,10 +1625,26 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
     </script>
+
+
+<!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
+
   </body>
 </html>

@@ -1,14 +1,14 @@
 <?php
-session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
-
-$conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
+  $conn = oci_connect('zoo_management', 'oracle12345', 'localhost/xe')
   or die(oci_error());
 if (!$conn) {
   echo "sorry";
 } else {
+  
 }
-
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +18,11 @@ if (!$conn) {
     <meta name="keywords" content="keywords" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>vaccine</title>
+    <title>museum </title>
     <!-- styles-->
     <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- favicon icon added  -->
-     <link rel="icon" type="image/x-icon" href="/img/logo.jpeg">
-
-     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-    />
+    <link rel="icon" type="image/x-icon" href="/img/zoo.ico">
 
      <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -47,6 +34,11 @@ if (!$conn) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="food_form.css">
+
+    <!-- billu bhai er code -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
 
     <!-- web-font loader-->
@@ -396,7 +388,7 @@ if (!$conn) {
         <div class="header__top">
           <div class="row align-items-center">
             <div class="col-6 col-lg-4">
-              <a class="logo" href="index.html"
+              <a class="logo" href="index.php"
                 ><img
                   class="logo__img col-lg-12"
                   src="img/logo/org5.png"
@@ -637,16 +629,16 @@ if (!$conn) {
       <!-- header end-->
 
       <!-- main part start  -->
-
+    
        <div class="bg-warning" style="margin-top: 150px; margin-bottom: 100px;">
   
               <div class="container pt-5 pb-5">
         <div class="card">
           <div class="card-body bg-danger p-4">
-            <h1 class="d-inline-block text-white ms-4">Vaccine Info:</h1>
-            <a href="vaccine_form.php"
+            <h1 class="d-inline-block text-white ms-4">Specimen Info:</h1>
+            <a href="museum_form.php"
               ><button type="button" class="btn btn-light btn-lg float-end">
-                + Add Vaccine
+                + Add Specimen
               </button></a
             >
           </div>
@@ -660,20 +652,20 @@ if (!$conn) {
         <thead>
             <tr>
                 <!-- <th>SI No</th> -->
-                <th>Vaccine Id</th>
-                <th>Vaccine Name</th>
-                <th>Arrival Date</th>
-                <th>Type</th>
-                <th>Preservation Environment</th>
-                <th>Cure Disease</th>
-                <th>Expiry Date</th>
-                <th>Production Date</th>
+                <th>SPECIMEN ID</th>
+                <th>CATEGORY</th>
+                <th>MU SPECIES</th>
+                <th>TOTAL_COUNT</th>
+                <th>COLLECTION DATE</th>
+                <th>PRESERVATION CHEMICAL</th>
+                <th>EMPLOYEE ID</th>
+              
             </tr>
         </thead>
         <tbody>
 
                    <?php
-                                $sql = "select *from VACCINE";
+                                $sql = "select *from MUSEUM";
                                 $stid = oci_parse($conn, $sql);
                                 $r = oci_execute($stid);
                                 while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) 
@@ -681,14 +673,13 @@ if (!$conn) {
                 
                                 echo "
                                 <tr>
-                                <td>" . $row["VACCINE_ID"] . "</td>
-                                <td>" . $row["VACCINE_NAME"] . "</td>
-                                <td>" . $row["ARRIVAL_DATE"] . "</td>
-                                <td>" . $row["TYPE"] . "</td>
-                                <td>" . $row["ENVIRONMENT_TYPE"] . "</td>
-                                <td>" . $row["CURE_DISEASE"] . "</td>
-                                <td>" . $row["EXPIRY_DATE"] . "</td>
-                                <td>" . $row["PRODUCTION_DATE"] . "</td>
+                                <td>" . $row["SPECIMEN_ID"] . "</td>
+                                <td>" . $row["S_CATEGORY"] . "</td>
+                                <td>" . $row["MU_SPECIES"] . "</td>
+                                <td>" . $row["S_TOTAL_COUNT"] . "</td>
+                                <td>" . $row["S_COLLECTION_DATE"] . "</td>
+                                <td>" . $row["S_PRESERVATION_CHEMICAL"] . "</td>
+                                <td>" . $row["EMPLOYEE_ID"] . "</td>
                                 </tr>
                                 ";
                                 }
@@ -1577,10 +1568,26 @@ if (!$conn) {
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="food_form.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
     </script>
+
+
+<!-- billu bhai returns -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+  </script>
+
   </body>
 </html>
